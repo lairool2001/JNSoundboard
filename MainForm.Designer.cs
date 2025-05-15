@@ -190,6 +190,8 @@
             this.lvKeySounds.TabIndex = 0;
             this.lvKeySounds.UseCompatibleStateImageBehavior = false;
             this.lvKeySounds.View = System.Windows.Forms.View.Details;
+            this.lvKeySounds.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LvKeySounds_KeyDown);
+            this.lvKeySounds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvKeySounds_MouseClick);
             this.lvKeySounds.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvKeySounds_MouseDoubleClick);
             // 
             // chKeys

@@ -11,7 +11,7 @@ namespace JNSoundboard
     {
         private IWavePlayer outputDevice;
         private readonly MixingSampleProvider mixer;
-        private IDictionary<string, CachedSound> cachedSounds = new Dictionary<string, CachedSound>();
+        private static IDictionary<string, CachedSound> cachedSounds = new Dictionary<string, CachedSound>();
 
         public AudioPlaybackEngine(int sampleRate = 44100, int channelCount = 2)
         {

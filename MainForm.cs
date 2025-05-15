@@ -34,12 +34,12 @@ namespace JNSoundboard
         }
 
         //There might be a smarter way to output the sound to two devices, but this is quick and it works.
-
+        const int sample = 48000;
         //Generally the virtual cable output
-        AudioPlaybackEngine playbackEngine1 = new AudioPlaybackEngine();
+        AudioPlaybackEngine playbackEngine1 = new AudioPlaybackEngine(sample);
 
         //A second output to also output the sound to your headphones or speaker.
-        AudioPlaybackEngine playbackEngine2 = new AudioPlaybackEngine();
+        AudioPlaybackEngine playbackEngine2 = new AudioPlaybackEngine(sample);
 
         //Linear volume for sounds sent to AudioPlaybackEngine (doesn't affect microphone loopback volume)
         private float soundVolume;
@@ -190,10 +190,6 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             }
 
             //Add events after settings have been loaded
-
-            lvKeySounds.KeyDown -= LvKeySounds_KeyDown;
-            lvKeySounds.KeyDown += LvKeySounds_KeyDown;
-
             EnableCheckboxChangeEvents();
             EnableSoundVolumeChangeEvents();
             EnableDeviceChangeEvents();
@@ -674,7 +670,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             {
                 if (e.KeyCode == Keys.Return)
                 {
-                    playKeySound(soundHotkeys[lvKeySounds.SelectedIndices[0]]);
+                    playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text, soundVolume);
                 }
                 else if (e.KeyCode == Keys.Back)
                 {
@@ -874,7 +870,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
         private void lvKeySounds_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            editSelectedSoundHotkey();
+            //editSelectedSoundHotkey();
         }
 
 
@@ -1325,7 +1321,23 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            btnSave_Click(null,null);
+            btnSave_Click(null, null);
+        }
+
+        private void lvKeySounds_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (lvKeySounds.SelectedItems.Count == 0)
+            {
+                return;
+            }
+            if (e.Button == MouseButtons.Left)
+            {
+                playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text,soundVolume);
+            }
+            else if (e.Button == MouseButtons.Right)
+            {
+                editSelectedSoundHotkey();
+            }
         }
     }
 }

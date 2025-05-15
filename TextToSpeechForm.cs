@@ -52,6 +52,7 @@ namespace JNSoundboard
             {
                 //show dialog
                 var diag = new SaveFileDialog();
+                diag.FileName = tbText.Text;
                 diag.Filter = "WAV files|*.wav";
 
                 if (diag.ShowDialog() == DialogResult.OK)

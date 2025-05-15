@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO.MemoryMappedFiles;
 using NAudio.Wave;
 
 namespace JNSoundboard
@@ -15,13 +16,16 @@ namespace JNSoundboard
 
         public int Read(float[] buffer, int offset, int count)
         {
-            var availableSamples = cachedSound.AudioData.Length - position;
-            var samplesToCopy = Math.Min(availableSamples, count);
+            // 計算可用樣本數
+            long availableSamples = cachedSound.sampleCount - position;
+            long samplesToCopy = Math.Min(availableSamples, count);
 
-            Array.Copy(cachedSound.AudioData, position, buffer, offset, samplesToCopy);
+            if (samplesToCopy <= 0)
+                return 0;
+
+            cachedSound.accessor.ReadArray(position*sizeof(float), buffer, offset, (int)samplesToCopy);
 
             position += samplesToCopy;
-
             return (int)samplesToCopy;
         }
 

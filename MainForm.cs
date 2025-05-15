@@ -178,6 +178,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             tbPushToTalkKey.Enabled = !cbEnablePushToTalk.Checked;
             clearHotkey.Enabled = !cbEnablePushToTalk.Checked;
 
+
             if (File.Exists(XMLSettings.soundboardSettings.LastXMLFile))
             {
                 //loadXMLFile() returns true if error occurred
@@ -189,6 +190,10 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             }
 
             //Add events after settings have been loaded
+
+            lvKeySounds.KeyDown -= LvKeySounds_KeyDown;
+            lvKeySounds.KeyDown += LvKeySounds_KeyDown;
+
             EnableCheckboxChangeEvents();
             EnableSoundVolumeChangeEvents();
             EnableDeviceChangeEvents();
@@ -461,15 +466,114 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                 MessageBox.Show((msg.Contains("UnspecifiedError calling waveOutOpen") ? "Something is wrong with either the sound you tried to play (" + file.Substring(file.LastIndexOf("\\") + 1) + ") (try converting it to another format) or your sound card driver\n\n" + msg : msg));
             }
         }
+        private bool loadXMLFileCache()
+        {
+            bool errorOccurred = true;
 
+            try
+            {
+                if (s != null && s.SoundHotkeys != null && s.SoundHotkeys.Length > 0)
+                {
+                    var items = new List<ListViewItem>();
+                    string errorMessage = "";
+                    string sameKeys = "";
+
+                    for (int i = 0; i < s.SoundHotkeys.Length; i++)
+                    {
+                        int kLength = s.SoundHotkeys[i].Keys.Length;
+                        bool keysNull = (kLength > 0 && !s.SoundHotkeys[i].Keys.Any(x => x != 0));
+                        int sLength = s.SoundHotkeys[i].SoundLocations.Length;
+                        bool soundsNotEmpty = s.SoundHotkeys[i].SoundLocations.All(x => !string.IsNullOrWhiteSpace(x)); //false if even one location is empty
+                        Environment.CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
+                        bool filesExist = s.SoundHotkeys[i].SoundLocations.All(x => File.Exists(x));
+
+                        if (keysNull || sLength < 1 || !soundsNotEmpty || !filesExist) //error in XML file
+                        {
+                            string tempErr = "";
+
+                            if (kLength == 0 && (sLength == 0 || !soundsNotEmpty)) tempErr = "entry is empty";
+                            else if (!keysNull) tempErr = "one or more keys are null";
+                            else if (sLength == 0) tempErr = "no sounds provided";
+                            else if (!filesExist) tempErr = "one or more sounds do not exist";
+
+                            errorMessage += "Entry #" + (i + 1).ToString() + " has an error: " + tempErr + "\r\n";
+                        }
+
+                        string keys = (kLength < 1 ? "" : Helper.keysArrayToString(s.SoundHotkeys[i].Keys));
+
+                        if (keys != "" && items.Count > 0 && items[items.Count - 1].Text == keys && !sameKeys.Contains(keys))
+                        {
+                            sameKeys += (sameKeys != "" ? ", " : "") + keys;
+                        }
+
+                        string windowString = string.IsNullOrWhiteSpace(s.SoundHotkeys[i].WindowTitle) ? "" : s.SoundHotkeys[i].WindowTitle;
+                        string volumeString = s.SoundHotkeys[i].SoundVolume == 1 ? "" : Helper.linearVolumeToString(s.SoundHotkeys[i].SoundVolume);
+                        string soundLocations = sLength < 1 ? "" : Helper.fileLocationsArrayToString(s.SoundHotkeys[i].SoundLocations);
+                        if (!soundLocations.Contains(textBox1.Text)) continue;
+                        var temp = new ListViewItem(keys);
+                        temp.SubItems.Add(volumeString);
+                        temp.SubItems.Add(windowString);
+                        temp.SubItems.Add(soundLocations);
+
+                        temp.ToolTipText = Helper.getFileNamesTooltip(s.SoundHotkeys[i].SoundLocations); //blank tooltips are not displayed
+
+                        items.Add(temp); //add even if there was an error, so that the user can fix within the app
+                    }
+
+                    if (items.Count > 0)
+                    {
+                        if (errorMessage != "")
+                        {
+                            MessageBox.Show((errorMessage == "" ? "" : errorMessage));
+                        }
+                        else
+                        {
+                            errorOccurred = false;
+                        }
+
+                        if (sameKeys != "")
+                        {
+                            MessageBox.Show("Multiple entries using the same keys. The keys being used multiple times are: " + sameKeys);
+                        }
+
+                        sortHotkeys();
+
+                        //xmlLocation = path;
+                    }
+                    else
+                    {
+                        SystemSounds.Beep.Play();
+                        //MessageBox.Show("No entries found, or all entries had errors in them (key being None, sound location behind empty or non-existant)");
+                    }
+
+                    soundHotkeys.Clear();
+                    soundHotkeys.AddRange(s.SoundHotkeys);
+
+                    lvKeySounds.Items.Clear();
+                    lvKeySounds.Items.AddRange(items.ToArray());
+                }
+                else
+                {
+                    SystemSounds.Beep.Play();
+                    MessageBox.Show("No entries found, or there was an error reading the settings file");
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Settings file structure is incorrect");
+            }
+
+            return errorOccurred;
+        }
+        XMLSettings.Settings s;
         private bool loadXMLFile(string path)
         {
             bool errorOccurred = true;
 
             try
             {
-                XMLSettings.Settings s = (XMLSettings.Settings)XMLSettings.ReadXML(typeof(XMLSettings.Settings), path);
-                
+                s = (XMLSettings.Settings)XMLSettings.ReadXML(typeof(XMLSettings.Settings), path);
+
                 if (s != null && s.SoundHotkeys != null && s.SoundHotkeys.Length > 0)
                 {
                     var items = new List<ListViewItem>();
@@ -562,6 +666,21 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             }
 
             return errorOccurred;
+        }
+
+        private void LvKeySounds_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (lvKeySounds.SelectedItems.Count > 0)
+            {
+                if (e.KeyCode == Keys.Return)
+                {
+                    playKeySound(soundHotkeys[lvKeySounds.SelectedIndices[0]]);
+                }
+                else if (e.KeyCode == Keys.Back)
+                {
+
+                }
+            }
         }
 
         public void sortHotkeys()
@@ -977,7 +1096,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             {
                 restartLoopback();
             }
-                
+
             stopPlayback();
 
             string deviceName = (string)cbPlaybackDevices2.SelectedItem;
@@ -1041,7 +1160,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             this.Hide();
         }
 
-        
+
         private bool cbEnableHotkeysWasChecked = false;
         private void tbPushToTalkKey_Enter(object sender, EventArgs e)
         {
@@ -1123,12 +1242,13 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             SaveAutoPushToTalkWindow();
         }
 
-        private void SaveAutoPushToTalkWindow() {
+        private void SaveAutoPushToTalkWindow()
+        {
             XMLSettings.soundboardSettings.AutoPushToTalkWindow = cbWindows.SelectedIndex == 0 ? "" : cbWindows.Text;
             saveSettings();
         }
 
-        private void clearHotkey_Click( object sender, EventArgs e )
+        private void clearHotkey_Click(object sender, EventArgs e)
         {
             tbPushToTalkKey.Text = "";
 
@@ -1196,6 +1316,16 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         {
             //deselect all controls (to set values)
             this.ActiveControl = null;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            loadXMLFileCache();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            btnSave_Click(null,null);
         }
     }
 }

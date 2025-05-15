@@ -77,6 +77,7 @@
             this.nSoundVolume = new System.Windows.Forms.NumericUpDown();
             this.gbSoundboard = new System.Windows.Forms.GroupBox();
             this.saveSettingsTimer = new System.Windows.Forms.Timer(this.components);
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.gbPushToTalk.SuspendLayout();
@@ -88,10 +89,10 @@
             // lblPlayback1
             // 
             this.lblPlayback1.AutoSize = true;
-            this.lblPlayback1.Location = new System.Drawing.Point(8, 21);
+            this.lblPlayback1.Location = new System.Drawing.Point(8, 19);
             this.lblPlayback1.Margin = new System.Windows.Forms.Padding(5, 5, 3, 3);
             this.lblPlayback1.Name = "lblPlayback1";
-            this.lblPlayback1.Size = new System.Drawing.Size(126, 13);
+            this.lblPlayback1.Size = new System.Drawing.Size(124, 12);
             this.lblPlayback1.TabIndex = 5;
             this.lblPlayback1.Text = "Speakers or Virtual Cable";
             // 
@@ -99,19 +100,19 @@
             // 
             this.cbPlaybackDevices1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlaybackDevices1.FormattingEnabled = true;
-            this.cbPlaybackDevices1.Location = new System.Drawing.Point(142, 18);
+            this.cbPlaybackDevices1.Location = new System.Drawing.Point(142, 17);
             this.cbPlaybackDevices1.Margin = new System.Windows.Forms.Padding(5, 5, 3, 3);
             this.cbPlaybackDevices1.Name = "cbPlaybackDevices1";
-            this.cbPlaybackDevices1.Size = new System.Drawing.Size(176, 21);
+            this.cbPlaybackDevices1.Size = new System.Drawing.Size(176, 20);
             this.cbPlaybackDevices1.TabIndex = 11;
             // 
             // cbEnableHotkeys
             // 
             this.cbEnableHotkeys.AutoSize = true;
-            this.cbEnableHotkeys.Location = new System.Drawing.Point(8, 20);
+            this.cbEnableHotkeys.Location = new System.Drawing.Point(8, 18);
             this.cbEnableHotkeys.Margin = new System.Windows.Forms.Padding(5, 5, 3, 3);
             this.cbEnableHotkeys.Name = "cbEnableHotkeys";
-            this.cbEnableHotkeys.Size = new System.Drawing.Size(101, 17);
+            this.cbEnableHotkeys.Size = new System.Drawing.Size(97, 16);
             this.cbEnableHotkeys.TabIndex = 16;
             this.cbEnableHotkeys.Text = "Enable Hotkeys";
             this.cbEnableHotkeys.UseVisualStyleBackColor = true;
@@ -125,10 +126,10 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSave.Location = new System.Drawing.Point(138, 321);
+            this.btnSave.Location = new System.Drawing.Point(138, 296);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(120, 23);
+            this.btnSave.Size = new System.Drawing.Size(120, 21);
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -137,9 +138,9 @@
             // btnRemove
             // 
             this.btnRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRemove.Location = new System.Drawing.Point(572, 125);
+            this.btnRemove.Location = new System.Drawing.Point(572, 115);
             this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(75, 43);
+            this.btnRemove.Size = new System.Drawing.Size(75, 40);
             this.btnRemove.TabIndex = 3;
             this.btnRemove.Text = "Remove";
             this.btnRemove.UseVisualStyleBackColor = true;
@@ -148,9 +149,9 @@
             // btnEdit
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnEdit.Location = new System.Drawing.Point(572, 76);
+            this.btnEdit.Location = new System.Drawing.Point(572, 70);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(75, 43);
+            this.btnEdit.Size = new System.Drawing.Size(75, 40);
             this.btnEdit.TabIndex = 2;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -159,9 +160,9 @@
             // btnAdd
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAdd.Location = new System.Drawing.Point(572, 27);
+            this.btnAdd.Location = new System.Drawing.Point(572, 25);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 43);
+            this.btnAdd.Size = new System.Drawing.Size(75, 40);
             this.btnAdd.TabIndex = 1;
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -181,11 +182,11 @@
             this.lvKeySounds.FullRowSelect = true;
             this.lvKeySounds.GridLines = true;
             this.lvKeySounds.HideSelection = false;
-            this.lvKeySounds.Location = new System.Drawing.Point(12, 27);
+            this.lvKeySounds.Location = new System.Drawing.Point(12, 25);
             this.lvKeySounds.MultiSelect = false;
             this.lvKeySounds.Name = "lvKeySounds";
             this.lvKeySounds.ShowItemToolTips = true;
-            this.lvKeySounds.Size = new System.Drawing.Size(554, 288);
+            this.lvKeySounds.Size = new System.Drawing.Size(554, 266);
             this.lvKeySounds.TabIndex = 0;
             this.lvKeySounds.UseCompatibleStateImageBehavior = false;
             this.lvKeySounds.View = System.Windows.Forms.View.Details;
@@ -214,10 +215,10 @@
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLoad.Location = new System.Drawing.Point(12, 321);
+            this.btnLoad.Location = new System.Drawing.Point(12, 296);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnLoad.Name = "btnLoad";
-            this.btnLoad.Size = new System.Drawing.Size(120, 23);
+            this.btnLoad.Size = new System.Drawing.Size(120, 21);
             this.btnLoad.TabIndex = 7;
             this.btnLoad.Text = "Load";
             this.btnLoad.UseVisualStyleBackColor = true;
@@ -226,10 +227,10 @@
             // btnReloadDevices
             // 
             this.btnReloadDevices.Image = ((System.Drawing.Image)(resources.GetObject("btnReloadDevices.Image")));
-            this.btnReloadDevices.Location = new System.Drawing.Point(324, 17);
+            this.btnReloadDevices.Location = new System.Drawing.Point(324, 16);
             this.btnReloadDevices.Margin = new System.Windows.Forms.Padding(3, 5, 5, 5);
             this.btnReloadDevices.Name = "btnReloadDevices";
-            this.btnReloadDevices.Size = new System.Drawing.Size(23, 23);
+            this.btnReloadDevices.Size = new System.Drawing.Size(23, 21);
             this.btnReloadDevices.TabIndex = 14;
             this.btnReloadDevices.UseVisualStyleBackColor = true;
             this.btnReloadDevices.Click += new System.EventHandler(this.btnReloadDevices_Click);
@@ -237,9 +238,9 @@
             // btnClear
             // 
             this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClear.Location = new System.Drawing.Point(572, 174);
+            this.btnClear.Location = new System.Drawing.Point(572, 161);
             this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(75, 43);
+            this.btnClear.Size = new System.Drawing.Size(75, 40);
             this.btnClear.TabIndex = 4;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
@@ -248,10 +249,10 @@
             // btnSaveAs
             // 
             this.btnSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveAs.Location = new System.Drawing.Point(264, 321);
+            this.btnSaveAs.Location = new System.Drawing.Point(264, 296);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnSaveAs.Name = "btnSaveAs";
-            this.btnSaveAs.Size = new System.Drawing.Size(120, 23);
+            this.btnSaveAs.Size = new System.Drawing.Size(120, 21);
             this.btnSaveAs.TabIndex = 9;
             this.btnSaveAs.Text = "Save As";
             this.btnSaveAs.UseVisualStyleBackColor = true;
@@ -273,31 +274,31 @@
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(64, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // texttospeechToolStripMenuItem
             // 
             this.texttospeechToolStripMenuItem.Name = "texttospeechToolStripMenuItem";
-            this.texttospeechToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.texttospeechToolStripMenuItem.Size = new System.Drawing.Size(105, 20);
             this.texttospeechToolStripMenuItem.Text = "Text-to-speech";
             this.texttospeechToolStripMenuItem.Click += new System.EventHandler(this.texttospeechToolStripMenuItem_Click);
             // 
             // checkForUpdateToolStripMenuItem
             // 
             this.checkForUpdateToolStripMenuItem.Name = "checkForUpdateToolStripMenuItem";
-            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
+            this.checkForUpdateToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
             this.checkForUpdateToolStripMenuItem.Text = "Check for update";
             this.checkForUpdateToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdateToolStripMenuItem_Click);
             // 
             // lblLoopback
             // 
             this.lblLoopback.AutoSize = true;
-            this.lblLoopback.Location = new System.Drawing.Point(8, 48);
+            this.lblLoopback.Location = new System.Drawing.Point(8, 44);
             this.lblLoopback.Margin = new System.Windows.Forms.Padding(5);
             this.lblLoopback.Name = "lblLoopback";
-            this.lblLoopback.Size = new System.Drawing.Size(114, 13);
+            this.lblLoopback.Size = new System.Drawing.Size(112, 12);
             this.lblLoopback.TabIndex = 18;
             this.lblLoopback.Text = "Microphone Loopback";
             // 
@@ -305,18 +306,18 @@
             // 
             this.cbLoopbackDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLoopbackDevices.FormattingEnabled = true;
-            this.cbLoopbackDevices.Location = new System.Drawing.Point(142, 45);
+            this.cbLoopbackDevices.Location = new System.Drawing.Point(142, 42);
             this.cbLoopbackDevices.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cbLoopbackDevices.Name = "cbLoopbackDevices";
-            this.cbLoopbackDevices.Size = new System.Drawing.Size(176, 21);
+            this.cbLoopbackDevices.Size = new System.Drawing.Size(176, 20);
             this.cbLoopbackDevices.TabIndex = 12;
             // 
             // btnPlaySelectedSound
             // 
             this.btnPlaySelectedSound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPlaySelectedSound.Location = new System.Drawing.Point(572, 223);
+            this.btnPlaySelectedSound.Location = new System.Drawing.Point(572, 206);
             this.btnPlaySelectedSound.Name = "btnPlaySelectedSound";
-            this.btnPlaySelectedSound.Size = new System.Drawing.Size(75, 43);
+            this.btnPlaySelectedSound.Size = new System.Drawing.Size(75, 40);
             this.btnPlaySelectedSound.TabIndex = 5;
             this.btnPlaySelectedSound.Text = "Play sound";
             this.btnPlaySelectedSound.UseVisualStyleBackColor = true;
@@ -325,9 +326,9 @@
             // btnStopAllSounds
             // 
             this.btnStopAllSounds.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStopAllSounds.Location = new System.Drawing.Point(572, 272);
+            this.btnStopAllSounds.Location = new System.Drawing.Point(572, 251);
             this.btnStopAllSounds.Name = "btnStopAllSounds";
-            this.btnStopAllSounds.Size = new System.Drawing.Size(75, 43);
+            this.btnStopAllSounds.Size = new System.Drawing.Size(75, 40);
             this.btnStopAllSounds.TabIndex = 6;
             this.btnStopAllSounds.Text = "Stop all sounds";
             this.btnStopAllSounds.UseVisualStyleBackColor = true;
@@ -349,19 +350,19 @@
             this.openToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(107, 48);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.Open_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.Exit_Click);
             // 
@@ -375,9 +376,9 @@
             this.gbPushToTalk.Controls.Add(this.tbPushToTalkKey);
             this.gbPushToTalk.Controls.Add(this.cbWindows);
             this.gbPushToTalk.Controls.Add(this.label4);
-            this.gbPushToTalk.Location = new System.Drawing.Point(373, 429);
+            this.gbPushToTalk.Location = new System.Drawing.Point(373, 396);
             this.gbPushToTalk.Name = "gbPushToTalk";
-            this.gbPushToTalk.Size = new System.Drawing.Size(274, 96);
+            this.gbPushToTalk.Size = new System.Drawing.Size(274, 89);
             this.gbPushToTalk.TabIndex = 19;
             this.gbPushToTalk.TabStop = false;
             this.gbPushToTalk.Text = "Auto activate push to talk";
@@ -387,10 +388,10 @@
             // 
             this.clearHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearHotkey.ForeColor = System.Drawing.Color.Red;
-            this.clearHotkey.Location = new System.Drawing.Point(244, 17);
+            this.clearHotkey.Location = new System.Drawing.Point(244, 16);
             this.clearHotkey.Margin = new System.Windows.Forms.Padding(3, 5, 5, 3);
             this.clearHotkey.Name = "clearHotkey";
-            this.clearHotkey.Size = new System.Drawing.Size(22, 22);
+            this.clearHotkey.Size = new System.Drawing.Size(22, 20);
             this.clearHotkey.TabIndex = 21;
             this.clearHotkey.Text = "X";
             this.clearHotkey.UseVisualStyleBackColor = true;
@@ -399,10 +400,10 @@
             // btnReloadWindows
             // 
             this.btnReloadWindows.Image = ((System.Drawing.Image)(resources.GetObject("btnReloadWindows.Image")));
-            this.btnReloadWindows.Location = new System.Drawing.Point(244, 43);
+            this.btnReloadWindows.Location = new System.Drawing.Point(244, 40);
             this.btnReloadWindows.Margin = new System.Windows.Forms.Padding(3, 3, 5, 3);
             this.btnReloadWindows.Name = "btnReloadWindows";
-            this.btnReloadWindows.Size = new System.Drawing.Size(22, 23);
+            this.btnReloadWindows.Size = new System.Drawing.Size(22, 21);
             this.btnReloadWindows.TabIndex = 23;
             this.btnReloadWindows.UseVisualStyleBackColor = true;
             this.btnReloadWindows.Click += new System.EventHandler(this.btnReloadWindows_Click);
@@ -410,10 +411,10 @@
             // cbEnablePushToTalk
             // 
             this.cbEnablePushToTalk.AutoSize = true;
-            this.cbEnablePushToTalk.Location = new System.Drawing.Point(8, 71);
+            this.cbEnablePushToTalk.Location = new System.Drawing.Point(8, 66);
             this.cbEnablePushToTalk.Margin = new System.Windows.Forms.Padding(5, 3, 3, 5);
             this.cbEnablePushToTalk.Name = "cbEnablePushToTalk";
-            this.cbEnablePushToTalk.Size = new System.Drawing.Size(59, 17);
+            this.cbEnablePushToTalk.Size = new System.Drawing.Size(56, 16);
             this.cbEnablePushToTalk.TabIndex = 24;
             this.cbEnablePushToTalk.Text = "Enable";
             this.cbEnablePushToTalk.UseVisualStyleBackColor = true;
@@ -422,20 +423,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(8, 21);
+            this.label3.Location = new System.Drawing.Point(8, 19);
             this.label3.Margin = new System.Windows.Forms.Padding(5, 5, 3, 3);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(25, 13);
+            this.label3.Size = new System.Drawing.Size(24, 12);
             this.label3.TabIndex = 1;
             this.label3.Text = "Key";
             // 
             // tbPushToTalkKey
             // 
-            this.tbPushToTalkKey.Location = new System.Drawing.Point(62, 18);
+            this.tbPushToTalkKey.Location = new System.Drawing.Point(62, 17);
             this.tbPushToTalkKey.Name = "tbPushToTalkKey";
             this.tbPushToTalkKey.ReadOnly = true;
             this.tbPushToTalkKey.ShortcutsEnabled = false;
-            this.tbPushToTalkKey.Size = new System.Drawing.Size(176, 20);
+            this.tbPushToTalkKey.Size = new System.Drawing.Size(176, 22);
             this.tbPushToTalkKey.TabIndex = 20;
             this.tbPushToTalkKey.Enter += new System.EventHandler(this.tbPushToTalkKey_Enter);
             this.tbPushToTalkKey.Leave += new System.EventHandler(this.tbPushToTalkKey_Leave);
@@ -445,20 +446,20 @@
             this.cbWindows.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbWindows.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbWindows.FormattingEnabled = true;
-            this.cbWindows.Location = new System.Drawing.Point(62, 44);
+            this.cbWindows.Location = new System.Drawing.Point(62, 41);
             this.cbWindows.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
             this.cbWindows.Name = "cbWindows";
-            this.cbWindows.Size = new System.Drawing.Size(176, 21);
+            this.cbWindows.Size = new System.Drawing.Size(176, 20);
             this.cbWindows.TabIndex = 22;
             this.cbWindows.Leave += new System.EventHandler(this.cbWindows_Leave);
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 47);
+            this.label4.Location = new System.Drawing.Point(8, 43);
             this.label4.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 13);
+            this.label4.Size = new System.Drawing.Size(45, 12);
             this.label4.TabIndex = 2;
             this.label4.Text = "Window";
             // 
@@ -473,9 +474,9 @@
             this.gbAudioDevices.Controls.Add(this.btnReloadDevices);
             this.gbAudioDevices.Controls.Add(this.cbPlaybackDevices1);
             this.gbAudioDevices.Controls.Add(this.cbLoopbackDevices);
-            this.gbAudioDevices.Location = new System.Drawing.Point(12, 352);
+            this.gbAudioDevices.Location = new System.Drawing.Point(12, 325);
             this.gbAudioDevices.Name = "gbAudioDevices";
-            this.gbAudioDevices.Size = new System.Drawing.Size(355, 173);
+            this.gbAudioDevices.Size = new System.Drawing.Size(355, 160);
             this.gbAudioDevices.TabIndex = 10;
             this.gbAudioDevices.TabStop = false;
             this.gbAudioDevices.Text = "Soundboard Audio devices";
@@ -485,29 +486,29 @@
             // 
             this.cbPlaybackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlaybackDevices2.FormattingEnabled = true;
-            this.cbPlaybackDevices2.Location = new System.Drawing.Point(142, 95);
+            this.cbPlaybackDevices2.Location = new System.Drawing.Point(142, 88);
             this.cbPlaybackDevices2.Margin = new System.Windows.Forms.Padding(5);
             this.cbPlaybackDevices2.Name = "cbPlaybackDevices2";
-            this.cbPlaybackDevices2.Size = new System.Drawing.Size(176, 21);
+            this.cbPlaybackDevices2.Size = new System.Drawing.Size(176, 20);
             this.cbPlaybackDevices2.TabIndex = 13;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(139, 69);
-            this.label6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 8);
+            this.label6.Location = new System.Drawing.Point(139, 64);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(141, 13);
+            this.label6.Size = new System.Drawing.Size(138, 12);
             this.label6.TabIndex = 20;
             this.label6.Text = "(do not choose virtual cable)";
             // 
             // lblPlayback2
             // 
             this.lblPlayback2.AutoSize = true;
-            this.lblPlayback2.Location = new System.Drawing.Point(8, 98);
+            this.lblPlayback2.Location = new System.Drawing.Point(8, 90);
             this.lblPlayback2.Margin = new System.Windows.Forms.Padding(5);
             this.lblPlayback2.Name = "lblPlayback2";
-            this.lblPlayback2.Size = new System.Drawing.Size(97, 13);
+            this.lblPlayback2.Size = new System.Drawing.Size(91, 12);
             this.lblPlayback2.TabIndex = 19;
             this.lblPlayback2.Text = "Playback Device 2";
             // 
@@ -518,10 +519,10 @@
             // cbEnableLoopback
             // 
             this.cbEnableLoopback.AutoSize = true;
-            this.cbEnableLoopback.Location = new System.Drawing.Point(115, 20);
+            this.cbEnableLoopback.Location = new System.Drawing.Point(115, 18);
             this.cbEnableLoopback.Margin = new System.Windows.Forms.Padding(3, 5, 5, 3);
             this.cbEnableLoopback.Name = "cbEnableLoopback";
-            this.cbEnableLoopback.Size = new System.Drawing.Size(110, 17);
+            this.cbEnableLoopback.Size = new System.Drawing.Size(106, 16);
             this.cbEnableLoopback.TabIndex = 17;
             this.cbEnableLoopback.Text = "Enable Loopback";
             this.cbEnableLoopback.UseVisualStyleBackColor = true;
@@ -529,10 +530,10 @@
             // 
             // vsSoundVolume
             // 
-            this.vsSoundVolume.Location = new System.Drawing.Point(8, 43);
+            this.vsSoundVolume.Location = new System.Drawing.Point(8, 40);
             this.vsSoundVolume.Margin = new System.Windows.Forms.Padding(5, 3, 3, 5);
             this.vsSoundVolume.Name = "vsSoundVolume";
-            this.vsSoundVolume.Size = new System.Drawing.Size(213, 20);
+            this.vsSoundVolume.Size = new System.Drawing.Size(213, 18);
             this.vsSoundVolume.TabIndex = 100;
             this.vsSoundVolume.TabStop = false;
             this.vsSoundVolume.VolumeChanged += new System.EventHandler(this.vsSoundVolume_VolumeChanged);
@@ -540,10 +541,10 @@
             // 
             // nSoundVolume
             // 
-            this.nSoundVolume.Location = new System.Drawing.Point(227, 43);
+            this.nSoundVolume.Location = new System.Drawing.Point(227, 40);
             this.nSoundVolume.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.nSoundVolume.Name = "nSoundVolume";
-            this.nSoundVolume.Size = new System.Drawing.Size(39, 20);
+            this.nSoundVolume.Size = new System.Drawing.Size(39, 22);
             this.nSoundVolume.TabIndex = 18;
             this.nSoundVolume.Value = new decimal(new int[] {
             100,
@@ -559,9 +560,9 @@
             this.gbSoundboard.Controls.Add(this.nSoundVolume);
             this.gbSoundboard.Controls.Add(this.cbEnableLoopback);
             this.gbSoundboard.Controls.Add(this.cbEnableHotkeys);
-            this.gbSoundboard.Location = new System.Drawing.Point(373, 352);
+            this.gbSoundboard.Location = new System.Drawing.Point(373, 325);
             this.gbSoundboard.Name = "gbSoundboard";
-            this.gbSoundboard.Size = new System.Drawing.Size(274, 71);
+            this.gbSoundboard.Size = new System.Drawing.Size(274, 66);
             this.gbSoundboard.TabIndex = 15;
             this.gbSoundboard.TabStop = false;
             this.gbSoundboard.Text = "Soundboard";
@@ -572,11 +573,20 @@
             this.saveSettingsTimer.Interval = 1000;
             this.saveSettingsTimer.Tick += new System.EventHandler(this.saveSettingsTimer_Tick);
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(390, 295);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(176, 22);
+            this.textBox1.TabIndex = 20;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 537);
+            this.ClientSize = new System.Drawing.Size(659, 496);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.gbSoundboard);
             this.Controls.Add(this.gbAudioDevices);
             this.Controls.Add(this.gbPushToTalk);
@@ -593,10 +603,11 @@
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(675, 576);
+            this.MinimumSize = new System.Drawing.Size(675, 535);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "JN Soundboard";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Click += new System.EventHandler(this.form_Click);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.menuStrip1.ResumeLayout(false);
@@ -663,6 +674,7 @@
         private System.Windows.Forms.GroupBox gbSoundboard;
         private System.Windows.Forms.Timer saveSettingsTimer;
         internal System.Windows.Forms.ColumnHeader chVolume;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }
 

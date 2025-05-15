@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
 using System.Linq;
+using System.Diagnostics;
 
 namespace JNSoundboard
 {
@@ -45,21 +46,28 @@ namespace JNSoundboard
 
         public void PlaySound(string fileName, float volume = 1)
         {
-            var input = new AudioFileReader(fileName);
-
-            CachedSound cachedSound = null;
-
-            if (!cachedSounds.TryGetValue(fileName, out cachedSound))
+            try
             {
-                cachedSound = new CachedSound(fileName);
-                cachedSounds.Add(fileName, cachedSound);
+                var input = new AudioFileReader(fileName);
+
+                CachedSound cachedSound = null;
+
+                if (!cachedSounds.TryGetValue(fileName, out cachedSound))
+                {
+                    cachedSound = new CachedSound(fileName);
+                    cachedSounds.Add(fileName, cachedSound);
+                }
+
+                var resultingSampleProvider = new VolumeSampleProvider(new CachedSoundSampleProvider(cachedSound));
+
+                resultingSampleProvider.Volume = volume;
+
+                AddMixerInput(resultingSampleProvider);
             }
-
-            var resultingSampleProvider = new VolumeSampleProvider(new CachedSoundSampleProvider(cachedSound));
-
-            resultingSampleProvider.Volume = volume;
-
-            AddMixerInput(resultingSampleProvider);
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         public void StopAllSounds()

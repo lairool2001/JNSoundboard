@@ -1,3 +1,13 @@
+# more function
+add filter
+add tts save and play
+add more 1 loopback
+edit double click to play list sound
+edit right click to edit
+edit make save wave default ttsName
+add split multi sound to each play sound list item
+edit can play large sound file by System.IO.MemoryMappedFiles
+
 # JN Soundboard - ZenitH-AT Fork
 A program written in C# using the NAudio library that uses hotkeys to play sounds into a chosen sound device. It is similar to [EXP Soundboard](https://sourceforge.net/projects/expsoundboard/), except that JN Soundboard is not as cross-platform as EXP, but, there are more features in JN than EXP.
 

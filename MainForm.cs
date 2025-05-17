@@ -89,8 +89,11 @@ namespace JNSoundboard
         }
 
         WaveIn loopbackSourceStream = null;
+        WaveIn loopbackSourceStream2 = null;
         BufferedWaveProvider loopbackWaveProvider = null;
+        BufferedWaveProvider loopbackWaveProvider2 = null;
         WaveOut loopbackWaveOut = null;
+        WaveOut loopbackWaveOut2 = null;
 
         Random rand = new Random();
 
@@ -117,6 +120,10 @@ Generally your headset, so that you can hear the sounds being played, too.";
 @"The input device which will also be sent into the above playback device.
 Generally your real microphone to speak through.
 DO NOT choose the virtual auidio cable!";
+        const string LOOPBACK_TOOLTIP2 =
+@"The input device which will also be sent into the above playback device.
+Generally your real microphone to speak through.
+DO NOT choose the virtual auidio cable!";
 
         const string SOUND_VOLUME_TOOLTIP =
 @"The volume of soundboard audio files.
@@ -134,6 +141,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             tooltip.SetToolTip(cbPlaybackDevices1, PLAYBACK1_TOOLTIP);
             tooltip.SetToolTip(cbPlaybackDevices2, PLAYBACK2_TOOLTIP);
             tooltip.SetToolTip(cbLoopbackDevices, LOOPBACK_TOOLTIP);
+            tooltip.SetToolTip(cbLoopbackDevices2, LOOPBACK_TOOLTIP2);
             tooltip.SetToolTip(lblPlayback1, PLAYBACK1_TOOLTIP);
             tooltip.SetToolTip(lblPlayback2, PLAYBACK2_TOOLTIP);
             tooltip.SetToolTip(lblLoopback, LOOPBACK_TOOLTIP);
@@ -213,6 +221,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         {
             cbEnableHotkeys.CheckedChanged -= cbEnableHotkeys_CheckedChanged;
             cbEnableLoopback.CheckedChanged -= cbEnableLoopback_CheckedChanged;
+            cbEnableLoopback2.CheckedChanged -= cbEnableLoopback_CheckedChanged;
             cbEnablePushToTalk.CheckedChanged -= cbEnablePushToTalk_CheckedChanged;
         }
 
@@ -220,6 +229,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         {
             cbEnableHotkeys.CheckedChanged += cbEnableHotkeys_CheckedChanged;
             cbEnableLoopback.CheckedChanged += cbEnableLoopback_CheckedChanged;
+            cbEnableLoopback2.CheckedChanged += cbEnableLoopback_CheckedChanged;
             cbEnablePushToTalk.CheckedChanged += cbEnablePushToTalk_CheckedChanged;
         }
 
@@ -240,13 +250,14 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             cbPlaybackDevices1.SelectedIndexChanged -= cbPlaybackDevices1_SelectedIndexChanged;
             cbPlaybackDevices2.SelectedIndexChanged -= cbPlaybackDevices2_SelectedIndexChanged;
             cbLoopbackDevices.SelectedIndexChanged -= cbLoopbackDevices_SelectedIndexChanged;
+            cbLoopbackDevices2.SelectedIndexChanged -= cbLoopbackDevices2_SelectedIndexChanged;
         }
-
         private void EnableDeviceChangeEvents()
         {
             cbPlaybackDevices1.SelectedIndexChanged += cbPlaybackDevices1_SelectedIndexChanged;
             cbPlaybackDevices2.SelectedIndexChanged += cbPlaybackDevices2_SelectedIndexChanged;
             cbLoopbackDevices.SelectedIndexChanged += cbLoopbackDevices_SelectedIndexChanged;
+            cbLoopbackDevices2.SelectedIndexChanged += cbLoopbackDevices2_SelectedIndexChanged;
         }
 
         private void OnAllInputEnded(object sender, EventArgs e)
@@ -260,6 +271,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
         private void initAudioPlaybackEngine1()
         {
+            if (SelectedPlaybackDevice1 < 0) return;
             try
             {
                 playbackEngine1.Init(SelectedPlaybackDevice1);
@@ -282,25 +294,23 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         private void initAudioPlaybackEngine2()
         {
             //Don't init if the null entry is selected
-            if (SelectedPlaybackDevice2 >= 0)
+            if (SelectedPlaybackDevice2 < 0) return;
+            try
             {
-                try
+                playbackEngine2.Init(SelectedPlaybackDevice2);
+            }
+            catch (NAudio.MmException ex)
+            {
+                SystemSounds.Beep.Play();
+
+                string msg = ex.ToString();
+
+                if (msg.Contains("AlreadyAllocated calling waveOutOpen"))
                 {
-                    playbackEngine2.Init(SelectedPlaybackDevice2);
+                    msg = "Failed to open device. Already in exclusive use by another application? \n\n" + msg;
                 }
-                catch (NAudio.MmException ex)
-                {
-                    SystemSounds.Beep.Play();
 
-                    string msg = ex.ToString();
-
-                    if (msg.Contains("AlreadyAllocated calling waveOutOpen"))
-                    {
-                        msg = "Failed to open device. Already in exclusive use by another application? \n\n" + msg;
-                    }
-
-                    MessageBox.Show("Playback 2" + msg);
-                }
+                MessageBox.Show("Playback 2" + msg);
             }
         }
 
@@ -354,6 +364,12 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
             cbLoopbackDevices.SelectedIndex = 0;
 
+            cbLoopbackDevices2.Items.Clear();
+            for (int i = 0; i < cbLoopbackDevices.Items.Count; i++)
+            {
+                cbLoopbackDevices2.Items.Add(cbLoopbackDevices.Items[i]);
+            }
+
             if (enableEvents)
             {
                 EnableDeviceChangeEvents();
@@ -362,6 +378,8 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             if (cbPlaybackDevices1.Items.Contains(XMLSettings.soundboardSettings.LastPlaybackDevice)) cbPlaybackDevices1.SelectedItem = XMLSettings.soundboardSettings.LastPlaybackDevice;
             if (cbPlaybackDevices2.Items.Contains(XMLSettings.soundboardSettings.LastPlaybackDevice2)) cbPlaybackDevices2.SelectedItem = XMLSettings.soundboardSettings.LastPlaybackDevice2;
             if (cbLoopbackDevices.Items.Contains(XMLSettings.soundboardSettings.LastLoopbackDevice)) cbLoopbackDevices.SelectedItem = XMLSettings.soundboardSettings.LastLoopbackDevice;
+            XMLSettings.soundboardSettings.LastLoopbackDevice2 = string.IsNullOrEmpty(XMLSettings.soundboardSettings.LastLoopbackDevice2) ? "" : XMLSettings.soundboardSettings.LastLoopbackDevice2;
+            if (cbLoopbackDevices2.Items.Contains(XMLSettings.soundboardSettings.LastLoopbackDevice2)) cbLoopbackDevices2.SelectedItem = XMLSettings.soundboardSettings.LastLoopbackDevice2;
         }
 
         private void restartLoopback()
@@ -377,8 +395,8 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                     loopbackSourceStream = new WaveIn();
                 loopbackSourceStream.DeviceNumber = deviceNumber;
                 loopbackSourceStream.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(deviceNumber).Channels);
-                loopbackSourceStream.BufferMilliseconds = 25;
-                loopbackSourceStream.NumberOfBuffers = 5;
+                loopbackSourceStream.BufferMilliseconds = 50;
+                loopbackSourceStream.NumberOfBuffers = 10;
                 loopbackSourceStream.DataAvailable += loopbackSourceStream_DataAvailable;
 
                 loopbackWaveProvider = new BufferedWaveProvider(loopbackSourceStream.WaveFormat);
@@ -387,11 +405,34 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                 if (loopbackWaveOut == null)
                     loopbackWaveOut = new WaveOut();
                 loopbackWaveOut.DeviceNumber = cbPlaybackDevices1.SelectedIndex;
-                loopbackWaveOut.DesiredLatency = 125;
+                loopbackWaveOut.DesiredLatency = 150;
                 loopbackWaveOut.Init(loopbackWaveProvider);
 
                 loopbackSourceStream.StartRecording();
                 loopbackWaveOut.Play();
+            }
+            deviceNumber = cbLoopbackDevices2.SelectedIndex - 1;
+            if (deviceNumber >= 0 && cbEnableLoopback2.Checked)
+            {
+                if (loopbackSourceStream2 == null)
+                    loopbackSourceStream2 = new WaveIn();
+                loopbackSourceStream2.DeviceNumber = deviceNumber;
+                loopbackSourceStream2.WaveFormat = new WaveFormat(44100, WaveIn.GetCapabilities(deviceNumber).Channels);
+                loopbackSourceStream2.BufferMilliseconds = 50;
+                loopbackSourceStream2.NumberOfBuffers = 10;
+                loopbackSourceStream2.DataAvailable += loopbackSourceStream2_DataAvailable;
+
+                loopbackWaveProvider2 = new BufferedWaveProvider(loopbackSourceStream2.WaveFormat);
+                loopbackWaveProvider2.DiscardOnBufferOverflow = true;
+
+                if (loopbackWaveOut2 == null)
+                    loopbackWaveOut2 = new WaveOut();
+                loopbackWaveOut2.DeviceNumber = cbPlaybackDevices1.SelectedIndex;
+                loopbackWaveOut2.DesiredLatency = 150;
+                loopbackWaveOut2.Init(loopbackWaveProvider2);
+
+                loopbackSourceStream2.StartRecording();
+                loopbackWaveOut2.Play();
             }
         }
 
@@ -405,11 +446,23 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                     loopbackWaveOut.Dispose();
                     loopbackWaveOut = null;
                 }
+                if (loopbackWaveOut2 != null)
+                {
+                    loopbackWaveOut2.Stop();
+                    loopbackWaveOut2.Dispose();
+                    loopbackWaveOut2 = null;
+                }
+
 
                 if (loopbackWaveProvider != null)
                 {
                     loopbackWaveProvider.ClearBuffer();
                     loopbackWaveProvider = null;
+                }
+                if (loopbackWaveProvider2 != null)
+                {
+                    loopbackWaveProvider2.ClearBuffer();
+                    loopbackWaveProvider2 = null;
                 }
 
                 if (loopbackSourceStream != null)
@@ -417,6 +470,12 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                     loopbackSourceStream.StopRecording();
                     loopbackSourceStream.Dispose();
                     loopbackSourceStream = null;
+                }
+                if (loopbackSourceStream2 != null)
+                {
+                    loopbackSourceStream2.StopRecording();
+                    loopbackSourceStream2.Dispose();
+                    loopbackSourceStream2 = null;
                 }
             }
             catch (Exception) { }
@@ -719,6 +778,11 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             if (loopbackWaveProvider != null && loopbackWaveProvider.BufferedDuration.TotalMilliseconds <= 100)
                 loopbackWaveProvider.AddSamples(e.Buffer, 0, e.BytesRecorded);
         }
+        private void loopbackSourceStream2_DataAvailable(object sender, WaveInEventArgs e)
+        {
+            if (loopbackWaveProvider2 != null && loopbackWaveProvider2.BufferedDuration.TotalMilliseconds <= 100)
+                loopbackWaveProvider2.AddSamples(e.Buffer, 0, e.BytesRecorded);
+        }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -867,6 +931,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             restartLoopback();
 
             XMLSettings.soundboardSettings.EnableLoopback = cbEnableLoopback.Checked;
+            XMLSettings.soundboardSettings.EnableLoopback2 = cbEnableLoopback2.Checked;
             saveSettings();
         }
 
@@ -1078,10 +1143,25 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             saveSettings();
         }
 
+
+        private void cbLoopbackDevices2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbEnableLoopback2.Checked) //start loopback on new device, or stop loopback
+            {
+                restartLoopback();
+            }
+
+            string deviceName = (string)cbLoopbackDevices2.SelectedItem;
+
+            XMLSettings.soundboardSettings.LastLoopbackDevice2 = deviceName;
+            saveSettings();
+        }
+
+
         private void cbPlaybackDevices1_SelectedIndexChanged(object sender, EventArgs e)
         {
             //start loopback on new device and stop all sounds playing
-            if (loopbackWaveOut != null && loopbackSourceStream != null)
+            if ((loopbackWaveOut != null && loopbackSourceStream != null) || ((loopbackWaveOut2 != null && loopbackSourceStream2 != null)))
             {
                 restartLoopback();
             }
@@ -1099,7 +1179,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         private void cbPlaybackDevices2_SelectedIndexChanged(object sender, EventArgs e)
         {
             //start loopback on new device and stop all sounds playing
-            if (loopbackWaveOut != null && loopbackSourceStream != null)
+            if ((loopbackWaveOut != null && loopbackSourceStream != null) || ((loopbackWaveOut2 != null && loopbackSourceStream2 != null)))
             {
                 restartLoopback();
             }

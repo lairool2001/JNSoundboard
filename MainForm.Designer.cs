@@ -78,6 +78,10 @@
             this.gbSoundboard = new System.Windows.Forms.GroupBox();
             this.saveSettingsTimer = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbLoopbackDevices2 = new System.Windows.Forms.ComboBox();
+            this.cbEnableLoopback2 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.gbPushToTalk.SuspendLayout();
@@ -126,7 +130,7 @@
             // btnSave
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSave.Location = new System.Drawing.Point(138, 296);
+            this.btnSave.Location = new System.Drawing.Point(138, 333);
             this.btnSave.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(120, 21);
@@ -186,7 +190,7 @@
             this.lvKeySounds.MultiSelect = false;
             this.lvKeySounds.Name = "lvKeySounds";
             this.lvKeySounds.ShowItemToolTips = true;
-            this.lvKeySounds.Size = new System.Drawing.Size(554, 266);
+            this.lvKeySounds.Size = new System.Drawing.Size(554, 302);
             this.lvKeySounds.TabIndex = 0;
             this.lvKeySounds.UseCompatibleStateImageBehavior = false;
             this.lvKeySounds.View = System.Windows.Forms.View.Details;
@@ -217,7 +221,7 @@
             // btnLoad
             // 
             this.btnLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLoad.Location = new System.Drawing.Point(12, 296);
+            this.btnLoad.Location = new System.Drawing.Point(12, 333);
             this.btnLoad.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnLoad.Name = "btnLoad";
             this.btnLoad.Size = new System.Drawing.Size(120, 21);
@@ -251,7 +255,7 @@
             // btnSaveAs
             // 
             this.btnSaveAs.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnSaveAs.Location = new System.Drawing.Point(264, 296);
+            this.btnSaveAs.Location = new System.Drawing.Point(264, 333);
             this.btnSaveAs.Margin = new System.Windows.Forms.Padding(3, 3, 3, 5);
             this.btnSaveAs.Name = "btnSaveAs";
             this.btnSaveAs.Size = new System.Drawing.Size(120, 21);
@@ -378,7 +382,7 @@
             this.gbPushToTalk.Controls.Add(this.tbPushToTalkKey);
             this.gbPushToTalk.Controls.Add(this.cbWindows);
             this.gbPushToTalk.Controls.Add(this.label4);
-            this.gbPushToTalk.Location = new System.Drawing.Point(373, 396);
+            this.gbPushToTalk.Location = new System.Drawing.Point(373, 463);
             this.gbPushToTalk.Name = "gbPushToTalk";
             this.gbPushToTalk.Size = new System.Drawing.Size(274, 89);
             this.gbPushToTalk.TabIndex = 19;
@@ -468,6 +472,9 @@
             // gbAudioDevices
             // 
             this.gbAudioDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbAudioDevices.Controls.Add(this.label1);
+            this.gbAudioDevices.Controls.Add(this.label2);
+            this.gbAudioDevices.Controls.Add(this.cbLoopbackDevices2);
             this.gbAudioDevices.Controls.Add(this.cbPlaybackDevices2);
             this.gbAudioDevices.Controls.Add(this.label6);
             this.gbAudioDevices.Controls.Add(this.lblPlayback2);
@@ -476,9 +483,9 @@
             this.gbAudioDevices.Controls.Add(this.btnReloadDevices);
             this.gbAudioDevices.Controls.Add(this.cbPlaybackDevices1);
             this.gbAudioDevices.Controls.Add(this.cbLoopbackDevices);
-            this.gbAudioDevices.Location = new System.Drawing.Point(12, 325);
+            this.gbAudioDevices.Location = new System.Drawing.Point(12, 362);
             this.gbAudioDevices.Name = "gbAudioDevices";
-            this.gbAudioDevices.Size = new System.Drawing.Size(355, 160);
+            this.gbAudioDevices.Size = new System.Drawing.Size(355, 190);
             this.gbAudioDevices.TabIndex = 10;
             this.gbAudioDevices.TabStop = false;
             this.gbAudioDevices.Text = "Soundboard Audio devices";
@@ -488,7 +495,7 @@
             // 
             this.cbPlaybackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbPlaybackDevices2.FormattingEnabled = true;
-            this.cbPlaybackDevices2.Location = new System.Drawing.Point(142, 88);
+            this.cbPlaybackDevices2.Location = new System.Drawing.Point(142, 112);
             this.cbPlaybackDevices2.Margin = new System.Windows.Forms.Padding(5);
             this.cbPlaybackDevices2.Name = "cbPlaybackDevices2";
             this.cbPlaybackDevices2.Size = new System.Drawing.Size(176, 20);
@@ -507,7 +514,7 @@
             // lblPlayback2
             // 
             this.lblPlayback2.AutoSize = true;
-            this.lblPlayback2.Location = new System.Drawing.Point(8, 90);
+            this.lblPlayback2.Location = new System.Drawing.Point(8, 117);
             this.lblPlayback2.Margin = new System.Windows.Forms.Padding(5);
             this.lblPlayback2.Name = "lblPlayback2";
             this.lblPlayback2.Size = new System.Drawing.Size(91, 12);
@@ -532,7 +539,7 @@
             // 
             // vsSoundVolume
             // 
-            this.vsSoundVolume.Location = new System.Drawing.Point(8, 40);
+            this.vsSoundVolume.Location = new System.Drawing.Point(8, 70);
             this.vsSoundVolume.Margin = new System.Windows.Forms.Padding(5, 3, 3, 5);
             this.vsSoundVolume.Name = "vsSoundVolume";
             this.vsSoundVolume.Size = new System.Drawing.Size(213, 18);
@@ -543,7 +550,7 @@
             // 
             // nSoundVolume
             // 
-            this.nSoundVolume.Location = new System.Drawing.Point(227, 40);
+            this.nSoundVolume.Location = new System.Drawing.Point(227, 66);
             this.nSoundVolume.Margin = new System.Windows.Forms.Padding(3, 3, 5, 5);
             this.nSoundVolume.Name = "nSoundVolume";
             this.nSoundVolume.Size = new System.Drawing.Size(39, 22);
@@ -558,13 +565,14 @@
             // gbSoundboard
             // 
             this.gbSoundboard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbSoundboard.Controls.Add(this.cbEnableLoopback2);
             this.gbSoundboard.Controls.Add(this.vsSoundVolume);
             this.gbSoundboard.Controls.Add(this.nSoundVolume);
             this.gbSoundboard.Controls.Add(this.cbEnableLoopback);
             this.gbSoundboard.Controls.Add(this.cbEnableHotkeys);
-            this.gbSoundboard.Location = new System.Drawing.Point(373, 325);
+            this.gbSoundboard.Location = new System.Drawing.Point(373, 362);
             this.gbSoundboard.Name = "gbSoundboard";
-            this.gbSoundboard.Size = new System.Drawing.Size(274, 66);
+            this.gbSoundboard.Size = new System.Drawing.Size(274, 96);
             this.gbSoundboard.TabIndex = 15;
             this.gbSoundboard.TabStop = false;
             this.gbSoundboard.Text = "Soundboard";
@@ -577,17 +585,60 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(390, 295);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(390, 334);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(176, 22);
             this.textBox1.TabIndex = 20;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(142, 101);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 12);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "(do not choose virtual cable)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 12);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Microphone Loopback2";
+            // 
+            // cbLoopbackDevices2
+            // 
+            this.cbLoopbackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoopbackDevices2.FormattingEnabled = true;
+            this.cbLoopbackDevices2.Location = new System.Drawing.Point(142, 78);
+            this.cbLoopbackDevices2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.cbLoopbackDevices2.Name = "cbLoopbackDevices2";
+            this.cbLoopbackDevices2.Size = new System.Drawing.Size(176, 20);
+            this.cbLoopbackDevices2.TabIndex = 21;
+            // 
+            // cbEnableLoopback2
+            // 
+            this.cbEnableLoopback2.AutoSize = true;
+            this.cbEnableLoopback2.Location = new System.Drawing.Point(115, 40);
+            this.cbEnableLoopback2.Margin = new System.Windows.Forms.Padding(3, 5, 5, 3);
+            this.cbEnableLoopback2.Name = "cbEnableLoopback2";
+            this.cbEnableLoopback2.Size = new System.Drawing.Size(112, 16);
+            this.cbEnableLoopback2.TabIndex = 101;
+            this.cbEnableLoopback2.Text = "Enable Loopback2";
+            this.cbEnableLoopback2.UseVisualStyleBackColor = true;
+            this.cbEnableLoopback2.CheckedChanged += new System.EventHandler(this.cbEnableLoopback_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(659, 496);
+            this.ClientSize = new System.Drawing.Size(659, 563);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.gbSoundboard);
             this.Controls.Add(this.gbAudioDevices);
@@ -677,6 +728,10 @@
         private System.Windows.Forms.Timer saveSettingsTimer;
         internal System.Windows.Forms.ColumnHeader chVolume;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cbLoopbackDevices2;
+        private System.Windows.Forms.CheckBox cbEnableLoopback2;
     }
 }
 

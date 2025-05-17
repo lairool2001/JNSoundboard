@@ -68,8 +68,8 @@ namespace JNSoundboard
             public Keyboard.Keys AutoPushToTalkKey;
             public Keyboard.Keys[] StopSoundKeys;
             public LoadXMLFile[] LoadXMLFiles;
-            public bool StartWithWindows, StartMinimised, MinimiseToTray, EnableHotkeys, EnableLoopback, EnableAutoPushToTalk, AllowOverlap;
-            public string AutoPushToTalkWindow, LastPlaybackDevice, LastPlaybackDevice2, LastLoopbackDevice, LastXMLFile;
+            public bool StartWithWindows, StartMinimised, MinimiseToTray, EnableHotkeys, EnableLoopback, EnableLoopback2, EnableAutoPushToTalk, AllowOverlap;
+            public string AutoPushToTalkWindow, LastPlaybackDevice, LastPlaybackDevice2, LastLoopbackDevice, LastLoopbackDevice2, LastXMLFile;
             public float SoundVolume;
 
             public SoundboardSettings() { }

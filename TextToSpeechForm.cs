@@ -246,10 +246,21 @@ namespace JNSoundboard
         private void button1_Click(object sender, EventArgs e)
         {
             string name = GetSafeFileName(tbText.Text) + ".wav";
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), name);
+            string windowText = (cbWindows.SelectedIndex > 0) ? cbWindows.Text : "";
+            Predicate<XMLSettings.SoundHotkey> search = x =>
+            {
+                if (x.SoundLocations.Length == 0) return false;
+                return x.SoundLocations[0] == path;
+            };
+            if (mainForm.soundHotkeys.Find(search) != null)
+            {
+                mainForm.playSound(path);
+                return;
+            }
             synth = new SpeechSynthesizer();
             //create file
             synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
-            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), name);
             synth.SetOutputToWaveFile(path);
             PromptBuilder builder = new PromptBuilder();
             builder.AppendText(tbText.Text);
@@ -260,9 +271,6 @@ namespace JNSoundboard
 
             //add to list
             if (!Helper.stringToKeysArray(tbKeys.Text, out Keyboard.Keys[] keysArray, out _)) keysArray = new Keyboard.Keys[] { };
-
-            string windowText = (cbWindows.SelectedIndex > 0) ? cbWindows.Text : "";
-
             mainForm.soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, locations));
 
             var newItem = new ListViewItem(tbKeys.Text);

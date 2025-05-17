@@ -49,6 +49,7 @@
             this.vsSoundVolume = new NAudio.Gui.VolumeSlider();
             this.nSoundVolume = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nSoundVolume)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,28 +58,28 @@
             this.tbText.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbText.Location = new System.Drawing.Point(12, 25);
+            this.tbText.Location = new System.Drawing.Point(12, 23);
             this.tbText.Multiline = true;
             this.tbText.Name = "tbText";
-            this.tbText.Size = new System.Drawing.Size(310, 65);
+            this.tbText.Size = new System.Drawing.Size(310, 60);
             this.tbText.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(28, 13);
+            this.label1.Size = new System.Drawing.Size(26, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "Text";
             // 
             // btnCancel
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCancel.Location = new System.Drawing.Point(247, 311);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.btnCancel.Location = new System.Drawing.Point(247, 287);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.Size = new System.Drawing.Size(75, 21);
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -87,11 +88,11 @@
             // tbKeys
             // 
             this.tbKeys.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.tbKeys.Location = new System.Drawing.Point(12, 189);
+            this.tbKeys.Location = new System.Drawing.Point(12, 174);
             this.tbKeys.Name = "tbKeys";
             this.tbKeys.ReadOnly = true;
             this.tbKeys.ShortcutsEnabled = false;
-            this.tbKeys.Size = new System.Drawing.Size(213, 20);
+            this.tbKeys.Size = new System.Drawing.Size(213, 22);
             this.tbKeys.TabIndex = 5;
             this.tbKeys.Enter += new System.EventHandler(this.tbKeys_Enter);
             this.tbKeys.Leave += new System.EventHandler(this.tbKeys_Leave);
@@ -100,20 +101,20 @@
             // 
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 173);
+            this.label2.Location = new System.Drawing.Point(12, 160);
             this.label2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 13);
+            this.label2.Size = new System.Drawing.Size(77, 12);
             this.label2.TabIndex = 8;
             this.label2.Text = "Keys (optional)";
             // 
             // btnCreateWAV
             // 
             this.btnCreateWAV.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCreateWAV.Location = new System.Drawing.Point(141, 311);
-            this.btnCreateWAV.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.btnCreateWAV.Location = new System.Drawing.Point(141, 287);
+            this.btnCreateWAV.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.btnCreateWAV.Name = "btnCreateWAV";
-            this.btnCreateWAV.Size = new System.Drawing.Size(100, 23);
+            this.btnCreateWAV.Size = new System.Drawing.Size(100, 21);
             this.btnCreateWAV.TabIndex = 10;
             this.btnCreateWAV.Text = "Create WAV";
             this.btnCreateWAV.UseVisualStyleBackColor = true;
@@ -128,9 +129,9 @@
             this.clearHotkey.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.clearHotkey.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clearHotkey.ForeColor = System.Drawing.Color.Red;
-            this.clearHotkey.Location = new System.Drawing.Point(231, 188);
+            this.clearHotkey.Location = new System.Drawing.Point(231, 174);
             this.clearHotkey.Name = "clearHotkey";
-            this.clearHotkey.Size = new System.Drawing.Size(22, 22);
+            this.clearHotkey.Size = new System.Drawing.Size(22, 20);
             this.clearHotkey.TabIndex = 6;
             this.clearHotkey.Text = "X";
             this.clearHotkey.UseVisualStyleBackColor = true;
@@ -140,9 +141,9 @@
             // 
             this.preview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.preview.AutoSize = true;
-            this.preview.Location = new System.Drawing.Point(166, 113);
+            this.preview.Location = new System.Drawing.Point(166, 103);
             this.preview.Name = "preview";
-            this.preview.Size = new System.Drawing.Size(75, 23);
+            this.preview.Size = new System.Drawing.Size(75, 22);
             this.preview.TabIndex = 2;
             this.preview.Text = "Preview";
             this.preview.UseVisualStyleBackColor = true;
@@ -156,10 +157,10 @@
             this.cbGender.Items.AddRange(new object[] {
             "Male",
             "Female"});
-            this.cbGender.Location = new System.Drawing.Point(12, 114);
+            this.cbGender.Location = new System.Drawing.Point(12, 105);
             this.cbGender.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.cbGender.Name = "cbGender";
-            this.cbGender.Size = new System.Drawing.Size(120, 21);
+            this.cbGender.Size = new System.Drawing.Size(120, 20);
             this.cbGender.TabIndex = 1;
             this.cbGender.SelectedIndexChanged += new System.EventHandler(this.cbGender_SelectedIndexChanged);
             // 
@@ -167,19 +168,19 @@
             // 
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 98);
+            this.label4.Location = new System.Drawing.Point(12, 90);
             this.label4.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.Size = new System.Drawing.Size(39, 12);
             this.label4.TabIndex = 16;
             this.label4.Text = "Gender";
             // 
             // stopPreview
             // 
             this.stopPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.stopPreview.Location = new System.Drawing.Point(247, 113);
+            this.stopPreview.Location = new System.Drawing.Point(247, 104);
             this.stopPreview.Name = "stopPreview";
-            this.stopPreview.Size = new System.Drawing.Size(75, 23);
+            this.stopPreview.Size = new System.Drawing.Size(75, 21);
             this.stopPreview.TabIndex = 3;
             this.stopPreview.Text = "Stop";
             this.stopPreview.UseVisualStyleBackColor = true;
@@ -189,10 +190,10 @@
             // 
             this.cbAddToList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cbAddToList.AutoSize = true;
-            this.cbAddToList.Location = new System.Drawing.Point(12, 148);
-            this.cbAddToList.Margin = new System.Windows.Forms.Padding(3, 10, 3, 3);
+            this.cbAddToList.Location = new System.Drawing.Point(12, 137);
+            this.cbAddToList.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
             this.cbAddToList.Name = "cbAddToList";
-            this.cbAddToList.Size = new System.Drawing.Size(72, 17);
+            this.cbAddToList.Size = new System.Drawing.Size(72, 16);
             this.cbAddToList.TabIndex = 4;
             this.cbAddToList.Text = "Add to list";
             this.cbAddToList.UseVisualStyleBackColor = true;
@@ -202,9 +203,9 @@
             // 
             this.btnReloadWindows.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnReloadWindows.Image = ((System.Drawing.Image)(resources.GetObject("btnReloadWindows.Image")));
-            this.btnReloadWindows.Location = new System.Drawing.Point(231, 276);
+            this.btnReloadWindows.Location = new System.Drawing.Point(231, 255);
             this.btnReloadWindows.Name = "btnReloadWindows";
-            this.btnReloadWindows.Size = new System.Drawing.Size(22, 23);
+            this.btnReloadWindows.Size = new System.Drawing.Size(22, 21);
             this.btnReloadWindows.TabIndex = 9;
             this.btnReloadWindows.UseVisualStyleBackColor = true;
             this.btnReloadWindows.Click += new System.EventHandler(this.btnReloadWindows_Click);
@@ -215,28 +216,28 @@
             this.cbWindows.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbWindows.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbWindows.FormattingEnabled = true;
-            this.cbWindows.Location = new System.Drawing.Point(12, 277);
+            this.cbWindows.Location = new System.Drawing.Point(12, 256);
             this.cbWindows.Name = "cbWindows";
-            this.cbWindows.Size = new System.Drawing.Size(213, 21);
+            this.cbWindows.Size = new System.Drawing.Size(213, 20);
             this.cbWindows.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 261);
+            this.label5.Location = new System.Drawing.Point(12, 241);
             this.label5.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(138, 13);
+            this.label5.Size = new System.Drawing.Size(134, 12);
             this.label5.TabIndex = 23;
             this.label5.Text = "Restrict to a certain window";
             // 
             // vsSoundVolume
             // 
             this.vsSoundVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.vsSoundVolume.Location = new System.Drawing.Point(12, 233);
+            this.vsSoundVolume.Location = new System.Drawing.Point(12, 215);
             this.vsSoundVolume.Name = "vsSoundVolume";
-            this.vsSoundVolume.Size = new System.Drawing.Size(213, 20);
+            this.vsSoundVolume.Size = new System.Drawing.Size(213, 18);
             this.vsSoundVolume.TabIndex = 100;
             this.vsSoundVolume.TabStop = false;
             this.vsSoundVolume.VolumeChanged += new System.EventHandler(this.vsSoundVolume_VolumeChanged);
@@ -245,9 +246,9 @@
             // nSoundVolume
             // 
             this.nSoundVolume.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.nSoundVolume.Location = new System.Drawing.Point(231, 233);
+            this.nSoundVolume.Location = new System.Drawing.Point(231, 215);
             this.nSoundVolume.Name = "nSoundVolume";
-            this.nSoundVolume.Size = new System.Drawing.Size(39, 20);
+            this.nSoundVolume.Size = new System.Drawing.Size(39, 22);
             this.nSoundVolume.TabIndex = 7;
             this.nSoundVolume.Value = new decimal(new int[] {
             100,
@@ -260,18 +261,31 @@
             // 
             this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 217);
+            this.label3.Location = new System.Drawing.Point(12, 200);
             this.label3.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(79, 13);
+            this.label3.Size = new System.Drawing.Size(79, 12);
             this.label3.TabIndex = 26;
             this.label3.Text = "Custom volume";
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Location = new System.Drawing.Point(35, 286);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 9, 3, 3);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(100, 21);
+            this.button1.TabIndex = 101;
+            this.button1.Text = "Play";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // TextToSpeechForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 346);
+            this.ClientSize = new System.Drawing.Size(334, 319);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.nSoundVolume);
             this.Controls.Add(this.vsSoundVolume);
@@ -292,7 +306,7 @@
             this.Controls.Add(this.tbText);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(350, 385);
+            this.MinimumSize = new System.Drawing.Size(350, 358);
             this.Name = "TextToSpeechForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Text-to-speech";
@@ -324,5 +338,6 @@
         private NAudio.Gui.VolumeSlider vsSoundVolume;
         private System.Windows.Forms.NumericUpDown nSoundVolume;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }

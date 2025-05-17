@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+using System.IO;
 using System.Speech.Synthesis;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace JNSoundboard
@@ -8,7 +10,22 @@ namespace JNSoundboard
     public partial class TextToSpeechForm : Form
     {
         MainForm mainForm;
-        SpeechSynthesizer synth = new SpeechSynthesizer();
+        SpeechSynthesizer _synth = null;
+        SpeechSynthesizer synth
+        {
+            get
+            {
+                if (_synth == null)
+                {
+                    _synth = new SpeechSynthesizer();
+                }
+                return _synth;
+            }
+            set
+            {
+                _synth = value;
+            }
+        }
         Prompt previewPrompt;
 
         internal static int lastGenderIndex = 0;
@@ -78,7 +95,6 @@ namespace JNSoundboard
             builder.AppendText(tbText.Text);
 
             synth.Speak(builder);
-
             synth.Dispose();
             synth = null;
 
@@ -225,6 +241,68 @@ namespace JNSoundboard
             volumeChangedByField = true;
 
             vsSoundVolume.Volume = (float)(nSoundVolume.Value / 100);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string name = GetSafeFileName(tbText.Text) + ".wav";
+            synth = new SpeechSynthesizer();
+            //create file
+            synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), name);
+            synth.SetOutputToWaveFile(path);
+            PromptBuilder builder = new PromptBuilder();
+            builder.AppendText(tbText.Text);
+            synth.Speak(builder);
+            synth.Dispose();
+            synth = null;
+            string[] locations = new string[] { path };
+
+            //add to list
+            if (!Helper.stringToKeysArray(tbKeys.Text, out Keyboard.Keys[] keysArray, out _)) keysArray = new Keyboard.Keys[] { };
+
+            string windowText = (cbWindows.SelectedIndex > 0) ? cbWindows.Text : "";
+
+            mainForm.soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, locations));
+
+            var newItem = new ListViewItem(tbKeys.Text);
+            newItem.SubItems.Add(vsSoundVolume.Volume == 1 ? "" : Helper.linearVolumeToString(vsSoundVolume.Volume));
+            newItem.SubItems.Add(windowText);
+            newItem.SubItems.Add(path);
+
+            newItem.ToolTipText = Helper.getFileNamesTooltip(locations);
+
+            mainForm.lvKeySounds.Items.Add(newItem);
+
+            mainForm.sortHotkeys();
+
+            //remember last used options
+            lastWindow = cbWindows.Text;
+            lastSoundVolume = vsSoundVolume.Volume;
+
+            //remember last used options
+            lastGenderIndex = cbGender.SelectedIndex;
+            lastAddToListChecked = cbAddToList.Checked;
+
+            mainForm.playSound(path);
+        }
+        static string GetSafeFileName(string input)
+        {
+            // 取代無效字元為下底線
+            string invalidChars = Regex.Escape(new string(Path.GetInvalidFileNameChars()));
+            string invalidRegex = $"[{invalidChars}]";
+            string safeName = Regex.Replace(input, invalidRegex, "_");
+
+            // 檢查保留名稱
+            string[] reservedNames = { "CON", "PRN", "AUX", "NUL", "COM1", "COM2", "COM3", "COM4", "COM5", "COM6", "COM7", "COM8", "COM9", "LPT1", "LPT2", "LPT3", "LPT4", "LPT5", "LPT6", "LPT7", "LPT8", "LPT9" };
+            if (Array.Exists(reservedNames, name => name.Equals(safeName, StringComparison.OrdinalIgnoreCase)))
+            {
+                safeName = "_" + safeName;
+            }
+
+            // 移除前後空格並確保不為空
+            safeName = safeName.Trim();
+            return string.IsNullOrEmpty(safeName) ? "DefaultFileName" : safeName;
         }
     }
 }

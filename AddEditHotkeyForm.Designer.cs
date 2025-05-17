@@ -220,9 +220,9 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(12, 12);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(132, 16);
+            this.checkBox1.Size = new System.Drawing.Size(202, 16);
             this.checkBox1.TabIndex = 10;
-            this.checkBox1.Text = "拆分為獨立撥放聲音";
+            this.checkBox1.Text = "Split into independent playback sound";
             this.checkBox1.UseVisualStyleBackColor = true;
             // 
             // AddEditHotkeyForm

@@ -140,29 +140,64 @@ namespace JNSoundboard
 
                 string windowText = (cbWindows.SelectedIndex > 0) ? cbWindows.Text : "";
 
-                if (editIndex != -1)
+                if (checkBox1.Checked)
                 {
-                    mainForm.lvKeySounds.Items[editIndex].SubItems[0].Text = tbKeys.Text;
-                    mainForm.lvKeySounds.Items[editIndex].SubItems[1].Text = volumeString;
-                    mainForm.lvKeySounds.Items[editIndex].SubItems[2].Text = windowText;
-                    mainForm.lvKeySounds.Items[editIndex].SubItems[3].Text = tbLocation.Text;
+                    for (int i = 0; i < soundLocations.Length; i++)
+                    {
+                        var location = soundLocations[i];
+                        var oneLocation = new string[] {location };
+                        if (editIndex != -1)
+                        {
+                            mainForm.lvKeySounds.Items[editIndex].SubItems[0].Text = tbKeys.Text;
+                            mainForm.lvKeySounds.Items[editIndex].SubItems[1].Text = volumeString;
+                            mainForm.lvKeySounds.Items[editIndex].SubItems[2].Text = windowText;
+                            mainForm.lvKeySounds.Items[editIndex].SubItems[3].Text = location;
 
-                    mainForm.lvKeySounds.Items[editIndex].ToolTipText = fileNames;
+                            mainForm.lvKeySounds.Items[editIndex].ToolTipText = location;
 
-                    mainForm.soundHotkeys[editIndex] = new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, soundLocations);
+                            mainForm.soundHotkeys[editIndex] = new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, oneLocation);
+                        }
+                        else
+                        {
+                            var newItem = new ListViewItem(tbKeys.Text);
+                            newItem.SubItems.Add(volumeString);
+                            newItem.SubItems.Add(windowText);
+                            newItem.SubItems.Add(location);
+
+                            newItem.ToolTipText = location;
+
+                            mainForm.lvKeySounds.Items.Add(newItem);
+
+                            mainForm.soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, oneLocation));
+                        }
+                    }
                 }
                 else
                 {
-                    var newItem = new ListViewItem(tbKeys.Text);
-                    newItem.SubItems.Add(volumeString);
-                    newItem.SubItems.Add(windowText);
-                    newItem.SubItems.Add(tbLocation.Text);
+                    if (editIndex != -1)
+                    {
+                        mainForm.lvKeySounds.Items[editIndex].SubItems[0].Text = tbKeys.Text;
+                        mainForm.lvKeySounds.Items[editIndex].SubItems[1].Text = volumeString;
+                        mainForm.lvKeySounds.Items[editIndex].SubItems[2].Text = windowText;
+                        mainForm.lvKeySounds.Items[editIndex].SubItems[3].Text = tbLocation.Text;
 
-                    newItem.ToolTipText = fileNames;
+                        mainForm.lvKeySounds.Items[editIndex].ToolTipText = fileNames;
 
-                    mainForm.lvKeySounds.Items.Add(newItem);
+                        mainForm.soundHotkeys[editIndex] = new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, soundLocations);
+                    }
+                    else
+                    {
+                        var newItem = new ListViewItem(tbKeys.Text);
+                        newItem.SubItems.Add(volumeString);
+                        newItem.SubItems.Add(windowText);
+                        newItem.SubItems.Add(tbLocation.Text);
 
-                    mainForm.soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, soundLocations));
+                        newItem.ToolTipText = fileNames;
+
+                        mainForm.lvKeySounds.Items.Add(newItem);
+
+                        mainForm.soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, windowText, soundLocations));
+                    }
                 }
 
                 mainForm.sortHotkeys();

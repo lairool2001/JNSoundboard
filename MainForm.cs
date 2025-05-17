@@ -468,20 +468,20 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
             try
             {
-                if (s != null && s.SoundHotkeys != null && s.SoundHotkeys.Length > 0)
+                if (s != null && soundHotkeys != null && soundHotkeys.Count > 0)
                 {
                     var items = new List<ListViewItem>();
                     string errorMessage = "";
                     string sameKeys = "";
 
-                    for (int i = 0; i < s.SoundHotkeys.Length; i++)
+                    for (int i = 0; i < soundHotkeys.Count; i++)
                     {
-                        int kLength = s.SoundHotkeys[i].Keys.Length;
-                        bool keysNull = (kLength > 0 && !s.SoundHotkeys[i].Keys.Any(x => x != 0));
-                        int sLength = s.SoundHotkeys[i].SoundLocations.Length;
-                        bool soundsNotEmpty = s.SoundHotkeys[i].SoundLocations.All(x => !string.IsNullOrWhiteSpace(x)); //false if even one location is empty
+                        int kLength = soundHotkeys[i].Keys.Length;
+                        bool keysNull = (kLength > 0 && !soundHotkeys[i].Keys.Any(x => x != 0));
+                        int sLength = soundHotkeys[i].SoundLocations.Length;
+                        bool soundsNotEmpty = soundHotkeys[i].SoundLocations.All(x => !string.IsNullOrWhiteSpace(x)); //false if even one location is empty
                         Environment.CurrentDirectory = Path.GetDirectoryName(Application.ExecutablePath);
-                        bool filesExist = s.SoundHotkeys[i].SoundLocations.All(x => File.Exists(x));
+                        bool filesExist = soundHotkeys[i].SoundLocations.All(x => File.Exists(x));
 
                         if (keysNull || sLength < 1 || !soundsNotEmpty || !filesExist) //error in XML file
                         {
@@ -495,23 +495,23 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                             errorMessage += "Entry #" + (i + 1).ToString() + " has an error: " + tempErr + "\r\n";
                         }
 
-                        string keys = (kLength < 1 ? "" : Helper.keysArrayToString(s.SoundHotkeys[i].Keys));
+                        string keys = (kLength < 1 ? "" : Helper.keysArrayToString(soundHotkeys[i].Keys));
 
                         if (keys != "" && items.Count > 0 && items[items.Count - 1].Text == keys && !sameKeys.Contains(keys))
                         {
                             sameKeys += (sameKeys != "" ? ", " : "") + keys;
                         }
 
-                        string windowString = string.IsNullOrWhiteSpace(s.SoundHotkeys[i].WindowTitle) ? "" : s.SoundHotkeys[i].WindowTitle;
-                        string volumeString = s.SoundHotkeys[i].SoundVolume == 1 ? "" : Helper.linearVolumeToString(s.SoundHotkeys[i].SoundVolume);
-                        string soundLocations = sLength < 1 ? "" : Helper.fileLocationsArrayToString(s.SoundHotkeys[i].SoundLocations);
+                        string windowString = string.IsNullOrWhiteSpace(soundHotkeys[i].WindowTitle) ? "" : soundHotkeys[i].WindowTitle;
+                        string volumeString = soundHotkeys[i].SoundVolume == 1 ? "" : Helper.linearVolumeToString(soundHotkeys[i].SoundVolume);
+                        string soundLocations = sLength < 1 ? "" : Helper.fileLocationsArrayToString(soundHotkeys[i].SoundLocations);
                         if (!soundLocations.Contains(textBox1.Text)) continue;
                         var temp = new ListViewItem(keys);
                         temp.SubItems.Add(volumeString);
                         temp.SubItems.Add(windowString);
                         temp.SubItems.Add(soundLocations);
 
-                        temp.ToolTipText = Helper.getFileNamesTooltip(s.SoundHotkeys[i].SoundLocations); //blank tooltips are not displayed
+                        temp.ToolTipText = Helper.getFileNamesTooltip(soundHotkeys[i].SoundLocations); //blank tooltips are not displayed
 
                         items.Add(temp); //add even if there was an error, so that the user can fix within the app
                     }
@@ -541,9 +541,6 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                         SystemSounds.Beep.Play();
                         //MessageBox.Show("No entries found, or all entries had errors in them (key being None, sound location behind empty or non-existant)");
                     }
-
-                    soundHotkeys.Clear();
-                    soundHotkeys.AddRange(s.SoundHotkeys);
 
                     lvKeySounds.Items.Clear();
                     lvKeySounds.Items.AddRange(items.ToArray());
@@ -670,7 +667,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             {
                 if (e.KeyCode == Keys.Return)
                 {
-                    playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text, soundVolume);
+                    playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text);
                 }
                 else if (e.KeyCode == Keys.Back)
                 {
@@ -773,6 +770,11 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                 cbEnableHotkeys.Checked = false;
             }
         }
+        public void playSound(string name)
+        {
+            var s = soundHotkeys.FirstOrDefault(x => string.Join(";", x.SoundLocations) == name);
+            playKeySound(s);
+        }
 
         private void btnPlaySound_Click(object sender, EventArgs e)
         {
@@ -871,6 +873,15 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         private void lvKeySounds_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             //editSelectedSoundHotkey();
+            switch (e.Button)
+            {
+                case MouseButtons.Left:
+                    if (lvKeySounds.SelectedItems.Count > 0)
+                    {
+                        playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text);
+                    }
+                    break;
+            }
         }
 
 
@@ -1332,7 +1343,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             }
             if (e.Button == MouseButtons.Left)
             {
-                playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text,soundVolume);
+                //playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text,soundVolume);
             }
             else if (e.Button == MouseButtons.Right)
             {

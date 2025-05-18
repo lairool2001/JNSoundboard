@@ -44,8 +44,8 @@ namespace JNSoundboard
         {
             mainForm = Application.OpenForms[0] as MainForm;
 
-            cbGender.SelectedIndex = lastGenderIndex;
-            Gender = (VoiceGender)cbGender.SelectedIndex + 1; //1 = Male; 2 = Female
+            //cbGender.SelectedIndex = lastGenderIndex;
+            //Gender = (VoiceGender)cbGender.SelectedIndex + 1; //1 = Male; 2 = Female
 
             cbAddToList.Checked = lastAddToListChecked;
             tbKeys.Enabled = lastAddToListChecked;
@@ -56,6 +56,17 @@ namespace JNSoundboard
             nSoundVolume.Enabled = lastAddToListChecked;
 
             vsSoundVolume.Volume = lastSoundVolume;
+
+            var voices = synth.GetInstalledVoices();
+            comboBox1.Items.Clear();
+            foreach (var voice in voices)
+            {
+                comboBox1.Items.Add(voice.VoiceInfo.Name);
+            }
+            if (comboBox1.Items.Count > 0)
+            {
+                comboBox1.SelectedIndex = 0;
+            }
 
             Helper.getWindows(cbWindows);
             Helper.selectWindow(cbWindows, lastWindow);
@@ -88,13 +99,10 @@ namespace JNSoundboard
             }
 
             //create file
-            synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
+            synth.SelectVoice(comboBox1.SelectedItem.ToString());
             synth.SetOutputToWaveFile(fileLocation[0]);
-
-            PromptBuilder builder = new PromptBuilder();
-            builder.AppendText(tbText.Text);
-
-            synth.Speak(builder);
+            synth.SpeakAsyncCancelAll();
+            synth.Speak(tbText.Text);
             synth.Dispose();
             synth = null;
 
@@ -124,7 +132,7 @@ namespace JNSoundboard
             }
 
             //remember last used options
-            lastGenderIndex = cbGender.SelectedIndex;
+            //lastGenderIndex = cbGender.SelectedIndex;
             lastAddToListChecked = cbAddToList.Checked;
 
             MessageBox.Show("Saved: " + fileLocation[0]);
@@ -170,14 +178,15 @@ namespace JNSoundboard
 
             if (!string.IsNullOrWhiteSpace(tbText.Text))
             {
-                synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
+                synth.SelectVoice(comboBox1.SelectedItem.ToString());
+                //synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
                 previewPrompt = synth.SpeakAsync(tbText.Text);
             }
         }
 
         private void cbGender_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Gender = (VoiceGender)cbGender.SelectedIndex + 1; //1 = Male; 2 = Female
+            //Gender = (VoiceGender)cbGender.SelectedIndex + 1; //1 = Male; 2 = Female
         }
 
         private void stopPreview_Click(object sender, EventArgs e)
@@ -245,7 +254,7 @@ namespace JNSoundboard
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string name = GetSafeFileName(tbText.Text) + ".wav";
+            string name = getFullPath(tbText.Text) + ".wav";
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyMusic), name);
             string windowText = (cbWindows.SelectedIndex > 0) ? cbWindows.Text : "";
             Predicate<XMLSettings.SoundHotkey> search = x =>
@@ -258,13 +267,11 @@ namespace JNSoundboard
                 mainForm.playSound(path);
                 return;
             }
-            synth = new SpeechSynthesizer();
             //create file
-            synth.SelectVoiceByHints(Gender, VoiceAge.NotSet);
+            synth.SelectVoice(comboBox1.SelectedItem.ToString());
+            synth.SpeakAsyncCancelAll();
             synth.SetOutputToWaveFile(path);
-            PromptBuilder builder = new PromptBuilder();
-            builder.AppendText(tbText.Text);
-            synth.Speak(builder);
+            synth.Speak(tbText.Text);
             synth.Dispose();
             synth = null;
             string[] locations = new string[] { path };
@@ -289,7 +296,7 @@ namespace JNSoundboard
             lastSoundVolume = vsSoundVolume.Volume;
 
             //remember last used options
-            lastGenderIndex = cbGender.SelectedIndex;
+            //lastGenderIndex = cbGender.SelectedIndex;
             lastAddToListChecked = cbAddToList.Checked;
 
             mainForm.playSound(path);
@@ -311,6 +318,10 @@ namespace JNSoundboard
             // 移除前後空格並確保不為空
             safeName = safeName.Trim();
             return string.IsNullOrEmpty(safeName) ? "DefaultFileName" : safeName;
+        }
+        string getFullPath(string name)
+        {
+            return $"{comboBox1.Text}_{GetSafeFileName(name)}";
         }
     }
 }

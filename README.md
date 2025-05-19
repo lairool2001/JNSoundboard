@@ -1,4 +1,4 @@
-# more function
+# more function - lairool2001 Fork
 * add filter
 * add tts save and play
 * add more 1 loopback

@@ -68,6 +68,9 @@
             this.cbWindows = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.gbAudioDevices = new System.Windows.Forms.GroupBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cbLoopbackDevices2 = new System.Windows.Forms.ComboBox();
             this.cbPlaybackDevices2 = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.lblPlayback2 = new System.Windows.Forms.Label();
@@ -76,12 +79,9 @@
             this.vsSoundVolume = new NAudio.Gui.VolumeSlider();
             this.nSoundVolume = new System.Windows.Forms.NumericUpDown();
             this.gbSoundboard = new System.Windows.Forms.GroupBox();
+            this.cbEnableLoopback2 = new System.Windows.Forms.CheckBox();
             this.saveSettingsTimer = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.cbLoopbackDevices2 = new System.Windows.Forms.ComboBox();
-            this.cbEnableLoopback2 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.gbPushToTalk.SuspendLayout();
@@ -491,6 +491,36 @@
             this.gbAudioDevices.Text = "Soundboard Audio devices";
             this.gbAudioDevices.Click += new System.EventHandler(this.form_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(142, 101);
+            this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(138, 12);
+            this.label1.TabIndex = 23;
+            this.label1.Text = "(do not choose virtual cable)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(8, 78);
+            this.label2.Margin = new System.Windows.Forms.Padding(5);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(118, 12);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Microphone Loopback2";
+            // 
+            // cbLoopbackDevices2
+            // 
+            this.cbLoopbackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbLoopbackDevices2.FormattingEnabled = true;
+            this.cbLoopbackDevices2.Location = new System.Drawing.Point(142, 78);
+            this.cbLoopbackDevices2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
+            this.cbLoopbackDevices2.Name = "cbLoopbackDevices2";
+            this.cbLoopbackDevices2.Size = new System.Drawing.Size(176, 20);
+            this.cbLoopbackDevices2.TabIndex = 21;
+            // 
             // cbPlaybackDevices2
             // 
             this.cbPlaybackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -578,6 +608,18 @@
             this.gbSoundboard.Text = "Soundboard";
             this.gbSoundboard.Click += new System.EventHandler(this.form_Click);
             // 
+            // cbEnableLoopback2
+            // 
+            this.cbEnableLoopback2.AutoSize = true;
+            this.cbEnableLoopback2.Location = new System.Drawing.Point(115, 40);
+            this.cbEnableLoopback2.Margin = new System.Windows.Forms.Padding(3, 5, 5, 3);
+            this.cbEnableLoopback2.Name = "cbEnableLoopback2";
+            this.cbEnableLoopback2.Size = new System.Drawing.Size(112, 16);
+            this.cbEnableLoopback2.TabIndex = 101;
+            this.cbEnableLoopback2.Text = "Enable Loopback2";
+            this.cbEnableLoopback2.UseVisualStyleBackColor = true;
+            this.cbEnableLoopback2.CheckedChanged += new System.EventHandler(this.cbEnableLoopback_CheckedChanged);
+            // 
             // saveSettingsTimer
             // 
             this.saveSettingsTimer.Interval = 1000;
@@ -591,48 +633,6 @@
             this.textBox1.Size = new System.Drawing.Size(176, 22);
             this.textBox1.TabIndex = 20;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(142, 101);
-            this.label1.Margin = new System.Windows.Forms.Padding(3, 0, 3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(138, 12);
-            this.label1.TabIndex = 23;
-            this.label1.Text = "(do not choose virtual cable)";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 78);
-            this.label2.Margin = new System.Windows.Forms.Padding(5);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(118, 12);
-            this.label2.TabIndex = 22;
-            this.label2.Text = "Microphone Loopback2";
-            // 
-            // cbLoopbackDevices2
-            // 
-            this.cbLoopbackDevices2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbLoopbackDevices2.FormattingEnabled = true;
-            this.cbLoopbackDevices2.Location = new System.Drawing.Point(142, 78);
-            this.cbLoopbackDevices2.Margin = new System.Windows.Forms.Padding(5, 3, 5, 3);
-            this.cbLoopbackDevices2.Name = "cbLoopbackDevices2";
-            this.cbLoopbackDevices2.Size = new System.Drawing.Size(176, 20);
-            this.cbLoopbackDevices2.TabIndex = 21;
-            // 
-            // cbEnableLoopback2
-            // 
-            this.cbEnableLoopback2.AutoSize = true;
-            this.cbEnableLoopback2.Location = new System.Drawing.Point(115, 40);
-            this.cbEnableLoopback2.Margin = new System.Windows.Forms.Padding(3, 5, 5, 3);
-            this.cbEnableLoopback2.Name = "cbEnableLoopback2";
-            this.cbEnableLoopback2.Size = new System.Drawing.Size(112, 16);
-            this.cbEnableLoopback2.TabIndex = 101;
-            this.cbEnableLoopback2.Text = "Enable Loopback2";
-            this.cbEnableLoopback2.UseVisualStyleBackColor = true;
-            this.cbEnableLoopback2.CheckedChanged += new System.EventHandler(this.cbEnableLoopback_CheckedChanged);
             // 
             // MainForm
             // 

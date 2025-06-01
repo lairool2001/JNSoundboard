@@ -262,11 +262,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
         private void OnAllInputEnded(object sender, EventArgs e)
         {
-            if (keyUpPushToTalkKey)
-            {
-                keyUpPushToTalkKey = false;
-                Keyboard.sendKey(pushToTalkKey, false);
-            }
+
         }
 
         private void initAudioPlaybackEngine1()
@@ -606,8 +602,8 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
                 }
                 else
                 {
-                    SystemSounds.Beep.Play();
-                    MessageBox.Show("No entries found, or there was an error reading the settings file");
+                    //SystemSounds.Beep.Play();
+                    //MessageBox.Show("No entries found, or there was an error reading the settings file");
                 }
             }
             catch

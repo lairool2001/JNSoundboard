@@ -79,10 +79,17 @@ namespace JNSoundboard
                 return;
             }
 
+
+            string fileNames = AddAudio();
+
+            this.Close();
+        }
+
+        public string AddAudio()
+        {
             string[] soundLocations = null;
             string fileNames;
             string errorMessage;
-
             if (!SettingsForm.addingEditingLoadXMLFile)
             {
                 if (Helper.stringToFileLocationsArray(tbLocation.Text, out soundLocations, out errorMessage))
@@ -93,17 +100,16 @@ namespace JNSoundboard
 
                         this.Close();
 
-                        return;
+                        return null;
                     }
                 }
 
                 if (soundLocations == null)
                 {
                     MessageBox.Show(errorMessage);
-                    return;
+                    return null;
                 }
             }
-
             if (!Helper.stringToKeysArray(tbKeys.Text, out Keyboard.Keys[] keysArray, out _)) keysArray = new Keyboard.Keys[] { };
 
             if (SettingsForm.addingEditingLoadXMLFile)
@@ -145,7 +151,7 @@ namespace JNSoundboard
                     for (int i = 0; i < soundLocations.Length; i++)
                     {
                         var location = soundLocations[i];
-                        var oneLocation = new string[] {location };
+                        var oneLocation = new string[] { location };
                         if (editIndex != -1)
                         {
                             mainForm.lvKeySounds.Items[editIndex].SubItems[0].Text = tbKeys.Text;
@@ -207,7 +213,7 @@ namespace JNSoundboard
                 lastWindow = cbWindows.Text;
             }
 
-            this.Close();
+            return fileNames;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

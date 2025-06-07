@@ -175,6 +175,7 @@
             // lvKeySounds
             // 
             this.lvKeySounds.Alignment = System.Windows.Forms.ListViewAlignment.Default;
+            this.lvKeySounds.AllowDrop = true;
             this.lvKeySounds.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -194,6 +195,8 @@
             this.lvKeySounds.TabIndex = 0;
             this.lvKeySounds.UseCompatibleStateImageBehavior = false;
             this.lvKeySounds.View = System.Windows.Forms.View.Details;
+            this.lvKeySounds.DragDrop += new System.Windows.Forms.DragEventHandler(this.lvKeySounds_DragDrop);
+            this.lvKeySounds.DragEnter += new System.Windows.Forms.DragEventHandler(this.lvKeySounds_DragEnter);
             this.lvKeySounds.KeyDown += new System.Windows.Forms.KeyEventHandler(this.LvKeySounds_KeyDown);
             this.lvKeySounds.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lvKeySounds_MouseClick);
             this.lvKeySounds.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.lvKeySounds_MouseDoubleClick);
@@ -266,6 +269,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.AllowDrop = true;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.settingsToolStripMenuItem,
             this.texttospeechToolStripMenuItem,
@@ -636,6 +640,7 @@
             // 
             // MainForm
             // 
+            this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(659, 563);
@@ -662,6 +667,7 @@
             this.Text = "JN Soundboard";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Click += new System.EventHandler(this.form_Click);
+            this.DragEnter += new System.Windows.Forms.DragEventHandler(this.MainForm_DragEnter);
             this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

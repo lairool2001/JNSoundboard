@@ -8,6 +8,8 @@ using System.Threading;
 using System.Media;
 using NAudio.Wave;
 using System.Diagnostics;
+using System.ComponentModel;
+using static JNSoundboard.Keyboard;
 
 namespace JNSoundboard
 {
@@ -720,11 +722,11 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         {
             if (lvKeySounds.SelectedItems.Count > 0)
             {
-                if (e.KeyCode == Keys.Return)
+                if (e.KeyCode == System.Windows.Forms.Keys.Return)
                 {
                     playSound(lvKeySounds.SelectedItems[0].SubItems[3].Text);
                 }
-                else if (e.KeyCode == Keys.Back)
+                else if (e.KeyCode == System.Windows.Forms.Keys.Back)
                 {
 
                 }
@@ -1424,6 +1426,56 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
             else if (e.Button == MouseButtons.Right)
             {
                 editSelectedSoundHotkey();
+            }
+        }
+
+        private void lvKeySounds_DragEnter(object sender, DragEventArgs e)
+        {
+            // 判斷拖曳進來的資料是否包含檔案格式
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // 允許複製操作，顯示加號游標
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // 不接受該格式，顯示禁止圖示
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+        private void lvKeySounds_DragDrop(object sender, DragEventArgs e)
+        {
+            if (!Helper.stringToKeysArray("", out Keyboard.Keys[] keysArray, out _)) keysArray = new Keyboard.Keys[] { };
+            string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
+            foreach (string file in files)
+            {
+                var newItem = new ListViewItem("");
+                newItem.SubItems.Add("");
+                newItem.SubItems.Add("");
+                newItem.SubItems.Add(file);
+
+                newItem.ToolTipText = file;
+
+                lvKeySounds.Items.Add(newItem);
+
+                soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, "", new string[] { file }));
+            }
+            sortHotkeys();
+        }
+
+        private void MainForm_DragEnter(object sender, DragEventArgs e)
+        {
+            // 判斷拖曳進來的資料是否包含檔案格式
+            if (e.Data.GetDataPresent(DataFormats.FileDrop))
+            {
+                // 允許複製操作，顯示加號游標
+                e.Effect = DragDropEffects.Copy;
+            }
+            else
+            {
+                // 不接受該格式，顯示禁止圖示
+                e.Effect = DragDropEffects.None;
             }
         }
     }

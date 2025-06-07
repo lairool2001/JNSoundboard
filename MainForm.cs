@@ -889,8 +889,6 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
             XMLSettings.soundboardSettings.LastXMLFile = xmlLocation;
             saveSettings();
-
-            MessageBox.Show("Hotkeys saved");
         }
 
         private void SaveHotkeysAs()
@@ -1461,7 +1459,7 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
                 soundHotkeys.Add(new XMLSettings.SoundHotkey(keysArray, vsSoundVolume.Volume, "", new string[] { file }));
             }
-            sortHotkeys();
+            //sortHotkeys();
         }
 
         private void MainForm_DragEnter(object sender, DragEventArgs e)

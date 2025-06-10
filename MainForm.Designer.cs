@@ -82,6 +82,7 @@
             this.cbEnableLoopback2 = new System.Windows.Forms.CheckBox();
             this.saveSettingsTimer = new System.Windows.Forms.Timer(this.components);
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.gbPushToTalk.SuspendLayout();
@@ -476,6 +477,7 @@
             // gbAudioDevices
             // 
             this.gbAudioDevices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.gbAudioDevices.Controls.Add(this.checkBox1);
             this.gbAudioDevices.Controls.Add(this.label1);
             this.gbAudioDevices.Controls.Add(this.label2);
             this.gbAudioDevices.Controls.Add(this.cbLoopbackDevices2);
@@ -638,6 +640,16 @@
             this.textBox1.TabIndex = 20;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(6, 167);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(68, 16);
+            this.checkBox1.TabIndex = 21;
+            this.checkBox1.Text = "PotPlayer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AllowDrop = true;
@@ -738,6 +750,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbLoopbackDevices2;
         private System.Windows.Forms.CheckBox cbEnableLoopback2;
+        private System.Windows.Forms.CheckBox checkBox1;
     }
 }
 

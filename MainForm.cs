@@ -10,6 +10,7 @@ using NAudio.Wave;
 using System.Diagnostics;
 using System.ComponentModel;
 using static JNSoundboard.Keyboard;
+using System.Threading.Tasks;
 
 namespace JNSoundboard
 {
@@ -483,8 +484,18 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
         {
             playbackEngine1.StopAllSounds();
             playbackEngine2.StopAllSounds();
+            tryKillProccess();
+        }
+        void tryKillProccess()
+        {
+
+            if (process != null && process.Container!=null && !process.HasExited)
+            {
+                process.Kill();
+            }
         }
 
+        Process process = new Process();
         private void playSound(string file, float soundVolume)
         {
             if (!XMLSettings.soundboardSettings.AllowOverlap)
@@ -494,12 +505,28 @@ Doesn't affect sounds with custom volumes or that are currently playing.";
 
             try
             {
-                playbackEngine1.PlaySound(file, soundVolume);
-
-                //Don't try to play the sound if the device is not selected or the device is the same as #1.
-                if (SelectedPlaybackDevice2 >= 0 && SelectedPlaybackDevice2 != SelectedPlaybackDevice1)
+                if (checkBox1.Checked)
                 {
-                    playbackEngine2.PlaySound(file, soundVolume);
+                    Task.Run(() =>
+                    {
+                        tryKillProccess();
+                        process.StartInfo = new ProcessStartInfo()
+                        {
+                            FileName = "PotPlayerMini64.exe",
+                            Arguments = file + " /config=\"語音版\""
+                        };
+                        process.Start();
+                    });
+                }
+                else
+                {
+                    playbackEngine1.PlaySound(file, soundVolume);
+
+                    //Don't try to play the sound if the device is not selected or the device is the same as #1.
+                    if (SelectedPlaybackDevice2 >= 0 && SelectedPlaybackDevice2 != SelectedPlaybackDevice1)
+                    {
+                        playbackEngine2.PlaySound(file, soundVolume);
+                    }
                 }
             }
             catch (FormatException ex)
